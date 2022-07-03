@@ -1,4 +1,4 @@
-# GoWebApp
+# GoCon
 Used for RCON on Minecraft Server
 # Packages
 - net/http
