@@ -12,7 +12,6 @@ import (
 var functions = template.FuncMap{}
 
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
-	fmt.Println("Hit Render Template")
 
 	tc, err := CreateTemplateCache()
 	if err != nil {
@@ -35,7 +34,6 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
 //CreateTemplateCache creates a template cache into a map based on templates
 func CreateTemplateCache() (map[string]*template.Template, error) {
-	fmt.Println("Hit CreateTemplateCache")
 	cache := map[string]*template.Template{}
 	pages, err := filepath.Glob("./templates/*.page.go.tmpl")
 	if err != nil {
@@ -43,7 +41,6 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	}
 
 	for _, page := range pages {
-		fmt.Println("processing: ", page)
 		name := filepath.Base(page)
 		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
 		if err != nil {
