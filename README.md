@@ -1,5 +1,5 @@
 # GoWebApp
 Used for RCON on Minecraft Server
-# Packegs
+# Packages
 - net/http
 - html/template
