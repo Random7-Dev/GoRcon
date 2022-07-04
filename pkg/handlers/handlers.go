@@ -3,13 +3,32 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/Random-7/GoRcon/pkg/config"
 	"github.com/Random-7/GoRcon/pkg/render"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
+//Repo the repository used by the handlers
+var Repo *Repository
+
+//Repository is the struct type
+type Repository struct {
+	App *config.AppConfig
+}
+
+//Creates the new repository
+func NewRepo(a *config.AppConfig) *Repository {
+	return &Repository{App: a}
+}
+
+//NewHandlers Sets the repository for the handlers
+func NewHandlers(r *Repository) {
+	Repo = r
+}
+
+func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "home.page.go.tmpl")
 }
 
-func About(w http.ResponseWriter, r *http.Request) {
+func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "about.page.go.tmpl")
 }

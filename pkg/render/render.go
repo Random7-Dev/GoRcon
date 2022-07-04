@@ -7,26 +7,38 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/Random-7/GoRcon/pkg/config"
 )
 
 var functions = template.FuncMap{}
 
+var app *config.AppConfig
+
+//NewTemplates sets the AppConfig to the current Appconfig(provided in params) so the render can update the template cache
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
+
 func RenderTemplate(w http.ResponseWriter, tmpl string) {
 
-	tc, err := CreateTemplateCache()
-	if err != nil {
-		log.Fatal(err)
+	var tc map[string]*template.Template
+	if app.UseCache {
+		//Read the template cache from the AppConfig
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
 	}
 
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal("Template not found: ", tmpl, " : ", err)
+		log.Fatal("Template not found in cache: ", tmpl)
 	}
 
 	buffer := new(bytes.Buffer)
 	_ = t.Execute(buffer, nil)
 
-	_, err = buffer.WriteTo(w)
+	_, err := buffer.WriteTo(w)
 	if err != nil {
 		fmt.Println("Error writing template to browser: ", err)
 	}
