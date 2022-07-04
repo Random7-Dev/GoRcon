@@ -17,7 +17,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(tc)
+
 	t, ok := tc[tmpl]
 	if !ok {
 		log.Fatal("Template not found: ", tmpl, " : ", err)
@@ -46,7 +46,6 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		if err != nil {
 			return cache, err
 		}
-
 		matches, err := filepath.Glob("./templates/*.layout.go.tmpl")
 		if err != nil {
 			return cache, err
@@ -57,7 +56,6 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 				return cache, err
 			}
 		}
-
 		cache[name] = ts
 	}
 
