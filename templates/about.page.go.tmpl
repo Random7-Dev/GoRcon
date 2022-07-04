@@ -6,6 +6,11 @@
             <h1>This is the About</h1>
             <p> About page with styling.</p>
             <p>{{index .StringMap "test"}}</p>
+            {{if ne (index .StringMap "remote_ip") ""}}
+            <p>IP Address:{{index .StringMap "remote_ip"}}</p>
+            {{else}}
+            <p>No Known IP address</p>
+            {{end}}
         </div>
     </div>
 </div>
