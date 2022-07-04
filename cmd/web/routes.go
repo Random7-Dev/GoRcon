@@ -20,6 +20,8 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	//Routes
 	router.Get("/", handlers.Repo.Home)
 	router.Get("/about", handlers.Repo.About)
-
+	//Static files
+	fileServer := http.FileServer(http.Dir("./static/"))
+	router.Handle("/static/*", http.StripPrefix("/static", fileServer))
 	return router
 }
