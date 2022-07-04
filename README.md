@@ -1,4 +1,5 @@
 # GoRcon
+Web application written in Go
 Used for RCON on Minecraft Server
 
 # Packages
