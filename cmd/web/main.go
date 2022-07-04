@@ -28,8 +28,10 @@ func main() {
 	app.UseCache = false
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
-	fmt.Println("Starting Web...")
-	_ = http.ListenAndServe(portNumber, nil)
+	fmt.Println("Starting Webserver on: ", portNumber)
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+	_ = srv.ListenAndServe()
 }
