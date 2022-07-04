@@ -15,19 +15,17 @@ import (
 const portNumber = ":8080"
 
 var app config.AppConfig
-var session *scs.SessionManager
 
 func main() {
 	//InProduction
 	app.InProduction = false
-	//Setup session and store in appconfig
-	session = scs.New()
-	session.Lifetime = 24 * time.Hour
-	session.Cookie.Persist = true
-	session.Cookie.SameSite = http.SameSiteLaxMode
-	session.Cookie.Secure = app.InProduction
 
-	app.Session = session
+	//Setup session and store in appconfig
+	app.Session = scs.New()
+	app.Session.Lifetime = 24 * time.Hour
+	app.Session.Cookie.Persist = true
+	app.Session.Cookie.SameSite = http.SameSiteLaxMode
+	app.Session.Cookie.Secure = app.InProduction
 
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
