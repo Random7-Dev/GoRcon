@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 
 	"github.com/Random-7/GoRcon/pkg/config"
+	"github.com/Random-7/GoRcon/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -20,23 +21,24 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, templateData *models.TemplateData) {
 
-	var tc map[string]*template.Template
+	var templateCache map[string]*template.Template
 	if app.UseCache {
 		//Read the template cache from the AppConfig
-		tc = app.TemplateCache
+		templateCache = app.TemplateCache
 	} else {
-		tc, _ = CreateTemplateCache()
+		//Rebuild the template cache
+		templateCache, _ = CreateTemplateCache()
 	}
 
-	t, ok := tc[tmpl]
+	t, ok := templateCache[tmpl]
 	if !ok {
 		log.Fatal("Template not found in cache: ", tmpl)
 	}
 
 	buffer := new(bytes.Buffer)
-	_ = t.Execute(buffer, nil)
+	_ = t.Execute(buffer, templateData)
 
 	_, err := buffer.WriteTo(w)
 	if err != nil {

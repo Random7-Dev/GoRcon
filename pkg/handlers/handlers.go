@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Random-7/GoRcon/pkg/config"
+	"github.com/Random-7/GoRcon/pkg/models"
 	"github.com/Random-7/GoRcon/pkg/render"
 )
 
@@ -26,9 +27,13 @@ func NewHandlers(r *Repository) {
 }
 
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "home.page.go.tmpl")
+	render.RenderTemplate(w, "home.page.go.tmpl", &models.TemplateData{})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "about.page.go.tmpl")
+	stringMap := make(map[string]string)
+	stringMap["test"] = "String map test"
+
+	render.RenderTemplate(w, "about.page.go.tmpl", &models.TemplateData{
+		StringMap: stringMap})
 }
