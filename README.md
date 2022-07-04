@@ -6,6 +6,7 @@ Used for RCON on Minecraft Server
 - net/http
 - html/template
 - Chi router (https://github.com/go-chi/chi)
+- NoSurf (https://github.com/justinas/nosurf)
 
 # Planned additions
 - Make use of GORM for database management
