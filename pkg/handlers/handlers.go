@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/Random-7/GoCon/pkg/render"
+	"github.com/Random-7/GoRcon/pkg/render"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Random-7/GoCon/pkg/handlers"
+	"github.com/Random-7/GoRcon/pkg/handlers"
 )
 
 const portNumber = ":8080"
