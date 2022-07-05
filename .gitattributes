@@ -1,1 +1,3 @@
 static/assets/** linguist-vendored
+*.css linguist-vendored
+*.scss linguist-vendored
