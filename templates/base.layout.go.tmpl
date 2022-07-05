@@ -1,21 +1,117 @@
 {{define "base"}}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-        {{block "css" .}}
-        {{end}}
-    </head>
-    <body>
-    {{block "content" .}}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>GoRcon</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- Material Kit CSS -->
+    <link href="/static/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    {{block "css" .}}
     {{end}}
+</head>
+
+<body class="dark-edition">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="azure" data-background-color="black" data-image="/static/assets/img/sidebar-1.jpg">
+            <div class="text-center logo">
+                <a href="\" class="text-center logo-normal">
+                    <i class="material-icons">bolt</i>
+                    GoRcon
+                    <i class="material-icons">bolt</i>
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="nav-item {{if eq (index .ActivePage) "Home"}}active{{else}}{{end}}">
+                        <a class="nav-link" href="/">
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{if eq (index .ActivePage) "Commands"}}active{{else}}{{end}}">
+                        <a class="nav-link" href="/commands">
+                            <i class="material-icons">content_paste</i>
+                            <p>Commands</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{if eq (index .ActivePage) "Players"}}active{{else}}{{end}}">
+                        <a class="nav-link" href="/players">
+                            <i class="material-icons">person</i>
+                            <p>Players</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{if eq (index .ActivePage) "Admin"}}active{{else}}{{end}}">
+                        <a class="nav-link" href="/admin">
+                            <i class="material-icons">library_books</i>
+                            <p>Admin</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{if eq (index .ActivePage) "About"}}active{{else}}{{end}}">
+                        <a class="nav-link" href="/about">
+                            <i class="material-icons">info</i>
+                            <p>About</p>
+                        </a>
+                    </li>
+                    <!-- your sidebar here -->
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="container-fluid">
+                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+                        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+                        crossorigin="anonymous"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+                        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+                        crossorigin="anonymous"></script>
+                    {{block "content" .}}
+                    {{end}}
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="float-left">
+                        <ul>
+                            <li>
+                                <a href="/">
+                                    GoRcon
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright float-right">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> made by Jon Fingas - Available on <a href="https://github.com/Random-7/GoRcon"> Github</a>
+                    </div>
+                    <!-- your footer here -->
+                </div>
+            </footer>
+        </div>
+    </div>
     {{block "js" .}}
     {{end}}
-    </body>
-    </html>
+    <!--   Core JS Files   -->
+    <script src="/static/assets/js/core/jquery.min.js"></script>
+    <script src="/static/assets/js/core/popper.min.js"></script>
+    <script src="/static/assets/js/core/bootstrap-material-design.min.js"></script>
+    <script src="https://unpkg.com/default-passive-events"></script>
+    <script src="/static/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Chartist JS -->
+    <script src="/static/assets/js/plugins/chartist.min.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="/static/assets/js/material-dashboard.js?v=2.1.0"></script>
+</body>
+</html>
 {{end}}

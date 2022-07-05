@@ -27,18 +27,20 @@ func NewHandlers(r *Repository) {
 }
 
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
-
-	render.RenderTemplate(w, "home.page.go.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, "home.page.go.tmpl", &models.TemplateData{ActivePage: "Home"})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	stringMap := make(map[string]string)
-	stringMap["test"] = "String map test"
-	remoteIP := m.App.Session.GetString(r.Context(), "remote_ip")
-	stringMap["remote_ip"] = remoteIP
+	render.RenderTemplate(w, "about.page.go.tmpl", &models.TemplateData{ActivePage: "About"})
+}
 
-	render.RenderTemplate(w, "about.page.go.tmpl", &models.TemplateData{
-		StringMap: stringMap})
+func (m *Repository) Players(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "players.page.go.tmpl", &models.TemplateData{ActivePage: "Players"})
+}
+
+func (m *Repository) Commands(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "commands.page.go.tmpl", &models.TemplateData{ActivePage: "Commands"})
+}
+func (m *Repository) Admin(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "admin.page.go.tmpl", &models.TemplateData{ActivePage: "Admin"})
 }
