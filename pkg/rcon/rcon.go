@@ -12,27 +12,40 @@ type Connection struct {
 	Rcon     mcrcon.MCConn
 }
 
+func (r *Connection) SetupConnection() error {
+	newRcon := new(mcrcon.MCConn)
+
+	err := newRcon.Open(r.Ip, r.Password)
+	if err != nil {
+		fmt.Println("Error opening rcon connection:", err)
+		return err
+	}
+	err = newRcon.Authenticate()
+	if err != nil {
+		fmt.Println("Error authenticating rcon connection:", err)
+		return err
+	}
+
+	r.Rcon = *newRcon
+	return nil
+}
+
 func (r *Connection) GetPlayers() (string, error) {
-	rcon := new(mcrcon.MCConn)
-	err := rcon.Open("10.0.50.50:25575", "spldrconmc2022")
-	if err != nil {
-		fmt.Println("Error connectiong Rcon: ", err)
-		return "error", err
-	}
-	defer rcon.Close()
-
-	err = rcon.Authenticate()
-	if err != nil {
-		fmt.Println("Error with authication: ", err)
-		return "error", err
-	}
-
-	response, err := rcon.SendCommand("list")
+	response, err := r.Rcon.SendCommand("list")
 	if err != nil {
 		fmt.Println("Error with send command: ", err)
 		return "error", err
 	}
+	fmt.Println(response)
+	return response, nil
+}
 
+func (r *Connection) SendCommand(cmd string) (string, error) {
+	response, err := r.Rcon.SendCommand(cmd)
+	if err != nil {
+		fmt.Println("Error with send command: ", err)
+		return "error", err
+	}
 	fmt.Println(response)
 	return response, nil
 }

@@ -8,6 +8,7 @@ import (
 
 	"github.com/Random-7/GoRcon/pkg/config"
 	"github.com/Random-7/GoRcon/pkg/handlers"
+	"github.com/Random-7/GoRcon/pkg/rcon"
 	"github.com/Random-7/GoRcon/pkg/render"
 	"github.com/alexedwards/scs/v2"
 )
@@ -40,10 +41,30 @@ func main() {
 	app.UseCache = false
 	render.NewTemplates(&app)
 
+	SetupRconConnection()
+
 	fmt.Println("Starting Webserver on", portNumber)
 	srv := &http.Server{
 		Addr:    portNumber,
 		Handler: setupRouter(&app),
 	}
 	_ = srv.ListenAndServe()
+}
+
+func SetupRconConnection() {
+	//Setup rcon conneciton
+	rcon := new(rcon.Connection)
+	rcon.Ip = "10.0.50.50:25575"
+	rcon.Password = "spldrconmc2022"
+	//pass into appconfig
+	app.Rcon = *rcon
+	app.Rcon.SetupConnection()
+
+	fmt.Println("IP:", app.Rcon.Ip)
+	fmt.Println("Pass:", app.Rcon.Password)
+	fmt.Println("Rcon:", app.Rcon.Rcon)
+}
+
+func CloseRconConnection() {
+	app.Rcon.Rcon.Close()
 }

@@ -36,8 +36,14 @@ func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("Error with loading player list", err)
 	}
+	version, err := Repo.App.Rcon.SendCommand("help")
+	if err != nil {
+		fmt.Println("Error with loading player list", err)
+	}
+
 	stringMap := make(map[string]string)
 	stringMap["Players"] = playerlist
+	stringMap["Version"] = version
 
 	render.RenderTemplate(w, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard",
 		StringMap: stringMap})
