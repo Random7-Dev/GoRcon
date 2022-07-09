@@ -1,22 +1,4 @@
 {{template "base" .}}
 {{define "content"}}
 <h1>Dashboard</h1>
-<div class="col-xl-4 col-lg-12">
-    <div class="card card-chart">
-        <div class="card-body">
-            <h4 class="card-title">Current Players:</h4>
-            <p class="card-category">
-                <span class="text-success">{{index .StringMap "Players"}}</i></span>
-            </p>
-            <p class="card-category">
-                <span class="text-success">{{index .StringMap "Version"}}</i></span>
-            </p>
-        </div>
-        <div class="card-footer">
-            <div class="stats">
-                <i class="material-icons"></i>
-            </div>
-        </div>
-    </div>
-</div>
 {{end}}

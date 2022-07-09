@@ -2,6 +2,7 @@ package rcon
 
 import (
 	"fmt"
+	"strings"
 
 	mcrcon "github.com/Kelwing/mc-rcon"
 )
@@ -30,14 +31,16 @@ func (r *Connection) SetupConnection() error {
 	return nil
 }
 
-func (r *Connection) GetPlayers() (string, error) {
+func (r *Connection) GetPlayers() (int, []string, error) {
 	response, err := r.Rcon.SendCommand("list")
 	if err != nil {
 		fmt.Println("Error with send command: ", err)
-		return "error", err
+		return 0, nil, err
 	}
-	fmt.Println(response)
-	return response, nil
+	resp := strings.Split(response, ":")   // split at colon "There are 2/20 players online:Random777, Dude1872"
+	players := strings.Split(resp[1], ",") //split at comma "Random777, Dude1872"
+
+	return len(players), players, nil
 }
 
 func (r *Connection) SendCommand(cmd string) (string, error) {
