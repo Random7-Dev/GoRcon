@@ -35,7 +35,6 @@ func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
 	playerlist, err := Repo.App.Rcon.GetPlayers()
 	if err != nil {
 		fmt.Println("Error with loading player list", err)
-		return
 	}
 	stringMap := make(map[string]string)
 	stringMap["Players"] = playerlist
