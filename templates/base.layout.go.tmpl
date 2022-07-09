@@ -29,8 +29,8 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item {{if eq (index .ActivePage) "Home"}}active{{else}}{{end}}">
-                        <a class="nav-link" href="/">
+                    <li class="nav-item {{if eq (index .ActivePage) "Dashboard"}}active{{else}}{{end}}">
+                        <a class="nav-link" href="/dashboard">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
@@ -51,6 +51,12 @@
                         <a class="nav-link" href="/admin">
                             <i class="material-icons">library_books</i>
                             <p>Admin</p>
+                        </a>
+                    </li>
+                    <li class="nav-item {{if eq (index .ActivePage) "Login"}}active{{else}}{{end}}">
+                        <a class="nav-link" href="/login">
+                            <i class="material-icons">login</i>
+                            <p>Login</p>
                         </a>
                     </li>
                     <li class="nav-item {{if eq (index .ActivePage) "About"}}active{{else}}{{end}}">

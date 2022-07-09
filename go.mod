@@ -7,3 +7,5 @@ require (
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/justinas/nosurf v1.1.1
 )
+
+require github.com/Kelwing/mc-rcon v0.0.0-20220214194105-bec8dcbccc3f // indirect

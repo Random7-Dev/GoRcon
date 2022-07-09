@@ -1,3 +1,5 @@
+github.com/Kelwing/mc-rcon v0.0.0-20220214194105-bec8dcbccc3f h1:ySopb0/agJ4rwNsIthx9uguIlbUEnjSVKcao3n9ZPEY=
+github.com/Kelwing/mc-rcon v0.0.0-20220214194105-bec8dcbccc3f/go.mod h1:wlXY/EO9CBjMViEh95JOQhp//RMnHs4ZUBhYhx43LdM=
 github.com/alexedwards/scs/v2 v2.5.0 h1:zgxOfNFmiJyXG7UPIuw1g2b9LWBeRLh3PjfB9BDmfL4=
 github.com/alexedwards/scs/v2 v2.5.0/go.mod h1:ToaROZxyKukJKT/xLcVQAChi5k6+Pn1Gvmdl7h3RRj8=
 github.com/go-chi/chi/v5 v5.0.7 h1:rDTPXLDHGATaeHvVlLcR4Qe0zftYethFucbjVQ1PxU8=

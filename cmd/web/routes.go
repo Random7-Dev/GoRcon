@@ -14,15 +14,18 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	//Chi middleware
 	router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
-	//Custom middleware
+	//Extra packages middleware
 	router.Use(SessionLoad)
 	router.Use(NoSurf)
 	//Routes
 	router.Get("/", handlers.Repo.Home)
+	router.Get("/dashboard", handlers.Repo.Dashboard)
 	router.Get("/about", handlers.Repo.About)
 	router.Get("/players", handlers.Repo.Players)
 	router.Get("/commands", handlers.Repo.Commands)
 	router.Get("/admin", handlers.Repo.Admin)
+	router.Get("/login", handlers.Repo.Login)
+	router.Get("/logout", handlers.Repo.Logout)
 	//Static files
 	fileServer := http.FileServer(http.Dir("./static/"))
 	router.Handle("/static/*", http.StripPrefix("/static", fileServer))
