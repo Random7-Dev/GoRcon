@@ -6,7 +6,6 @@ import (
 
 	"github.com/Random-7/GoRcon/pkg/config"
 	"github.com/Random-7/GoRcon/pkg/models"
-	"github.com/Random-7/GoRcon/pkg/rcon"
 	"github.com/Random-7/GoRcon/pkg/render"
 )
 
@@ -33,7 +32,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
-	playerlist, err := rcon.GetPlayers()
+	playerlist, err := Repo.App.Rcon.GetPlayers()
 	if err != nil {
 		fmt.Println("Error with loading player list", err)
 		return

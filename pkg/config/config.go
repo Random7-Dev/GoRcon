@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 
+	"github.com/Random-7/GoRcon/pkg/rcon"
 	"github.com/alexedwards/scs/v2"
 )
 
@@ -14,4 +15,5 @@ type AppConfig struct {
 	InfoLog       *log.Logger
 	InProduction  bool
 	Session       *scs.SessionManager
+	Rcon          rcon.Connection
 }

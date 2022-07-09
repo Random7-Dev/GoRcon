@@ -6,7 +6,13 @@ import (
 	mcrcon "github.com/Kelwing/mc-rcon"
 )
 
-func GetPlayers() (string, error) {
+type Connection struct {
+	Ip       string
+	Password string
+	Rcon     mcrcon.MCConn
+}
+
+func (r *Connection) GetPlayers() (string, error) {
 	rcon := new(mcrcon.MCConn)
 	err := rcon.Open("10.0.50.50:25575", "spldrconmc2022")
 	if err != nil {
