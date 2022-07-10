@@ -8,9 +8,22 @@ import (
 )
 
 type Connection struct {
-	Ip       string
-	Password string
-	Rcon     mcrcon.MCConn
+	Ip               string
+	Password         string
+	ConnectionStatus bool
+	Rcon             mcrcon.MCConn
+}
+
+func (r *Connection) Connection() {
+	if r.ConnectionStatus {
+		return
+	} else {
+		err := r.SetupConnection()
+		if err != nil {
+			fmt.Println("Error setting up rcon:", err)
+			return
+		}
+	}
 }
 
 func (r *Connection) SetupConnection() error {
@@ -28,10 +41,13 @@ func (r *Connection) SetupConnection() error {
 	}
 
 	r.Rcon = *newRcon
+	r.ConnectionStatus = true
 	return nil
 }
 
 func (r *Connection) GetPlayers() (int, []string, error) {
+	r.Connection() // test conneection?
+
 	response, err := r.Rcon.SendCommand("list")
 	if err != nil {
 		fmt.Println("Error with send command: ", err)
@@ -44,6 +60,8 @@ func (r *Connection) GetPlayers() (int, []string, error) {
 }
 
 func (r *Connection) SendCommand(cmd string) (string, error) {
+	r.Connection() // test conneection?
+
 	response, err := r.Rcon.SendCommand(cmd)
 	if err != nil {
 		fmt.Println("Error with send command: ", err)
@@ -51,4 +69,19 @@ func (r *Connection) SendCommand(cmd string) (string, error) {
 	}
 	fmt.Println(response)
 	return response, nil
+}
+
+func (r *Connection) StopServer() error {
+	r.Connection() // test conneection?
+
+	r.SendCommand("say Shutting server down")
+	_, err := r.Rcon.SendCommand("stop")
+	if err != nil {
+		fmt.Println("Error with send command: ", err)
+		return err
+	}
+
+	r.Rcon.Close()
+	r.ConnectionStatus = false
+	return nil
 }

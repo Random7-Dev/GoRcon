@@ -60,11 +60,4 @@ func SetupRconConnection() {
 	app.Rcon = *rcon
 	app.Rcon.SetupConnection()
 
-	fmt.Println("IP:", app.Rcon.Ip)
-	fmt.Println("Pass:", app.Rcon.Password)
-	fmt.Println("Rcon:", app.Rcon.Rcon)
-}
-
-func CloseRconConnection() {
-	app.Rcon.Rcon.Close()
 }

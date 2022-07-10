@@ -76,6 +76,7 @@ func (m *Repository) Commands(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
+
 	render.RenderTemplate(w, "login.page.go.tmpl", &models.TemplateData{ActivePage: "Login"})
 }
 
