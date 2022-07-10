@@ -21,6 +21,14 @@
                             <th class="text-info text-center">
                                 Move Player to Dimension 0
                             </th>
+                            </th>
+                            <th class="text-info text-center">
+                                Move Player to Home
+                            </th>
+                            </th>
+                            <th class="text-info text-center">
+                                Move Player to Death Point
+                            </th>
                             <th class="text-info text-center">
                                 Kick Player from Server
                             </th>
@@ -31,8 +39,8 @@
                             <tr>
                                 <td>
                                     <div class="col text-center text-success">
-                                    {{.}}
-                                    </div>  
+                                        {{.}}
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="col text-center">
@@ -41,12 +49,22 @@
                                 </td>
                                 <td>
                                     <div class="col text-center">
-                                    <button type="submit" class="btn btn-info">TPX to world</button>
+                                        <button type="submit" class="btn btn-success">TPX to Dimension 0</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col text-center">
+                                        <button type="submit" class="btn btn-primary">TP to players home</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col text-center">
+                                        <button type="submit" class="btn btn-warning">TP to players death point</button>
                                     </div>
                                 </td>
                                 <td class="text-danger">
                                     <div class="col text-center">
-                                    <button type="submit" class="btn btn-danger">Kick</button>
+                                        <button type="submit" class="btn btn-danger">Kick</button>
                                     </div>
                                 </td>
                             </tr>

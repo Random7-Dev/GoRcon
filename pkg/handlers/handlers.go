@@ -44,6 +44,7 @@ func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
 
 	data := make(map[string]interface{})
 	data["players"] = playerlist
+	data["rconStatus"] = m.App.Rcon.ConnectionStatus
 
 	render.RenderTemplate(w, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard",
 		StringMap: stringMap, DataMap: data})
