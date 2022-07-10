@@ -13,5 +13,5 @@ require github.com/Kelwing/mc-rcon v0.0.0-20220214194105-bec8dcbccc3f
 require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
-	gorm.io/gorm v1.23.8 // indirect
+	gorm.io/gorm v1.23.8
 )
