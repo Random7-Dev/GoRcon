@@ -6,7 +6,7 @@
         <div class="card card-chart">
             {{$rconStatus := index .DataMap "rconStatus"}}
             <div class="card-header {{if eq ($rconStatus) true}}card-header-success{{else}}card-header-danger{{end}}">
-                <h3 class="card-title text-center"><i class="material-icons">list_alt</i> Rcon Status</h3>
+                <h3 class="card-title text-center"><i class="material-icons">hub</i> Rcon Status</h3>
                 <p class="card-category">Current Rcon status {{if eq ($rconStatus) true}}Connected{{else}}Disconnected{{end}}</p>
             </div>
             <div class="card-body">
@@ -35,16 +35,16 @@
     <div class="col-xl-4 col-lg-12">
         <div class="card card-chart">
             <div class="card-header card-header-primary">
-                <h3 class="card-title text-center"><i class="material-icons">list_alt</i> Past Rcon Commands</h3>
+                <h3 class="card-title text-center"><i class="material-icons">menu_book</i> Past Rcon Commands</h3>
                 <p class="card-category">List of past Rcon commands</p>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col text-center">
-                        
+
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="card-footer">
                 <div class="stats">
                     <p class="card-category">
@@ -84,7 +84,7 @@
     <div class="col-xl-4 col-lg-12">
         <div class="card card-chart">
             <div class="card-header card-header-warning">
-                <h3 class="card-title text-center"><i class="material-icons">list_alt</i>Past Player Counts</h3>
+                <h3 class="card-title text-center"><i class="material-icons">bar_chart</i> Past Player Counts</h3>
                 <p class="card-category">Players connected in the past day</p>
             </div>
             <div class="card-body">
