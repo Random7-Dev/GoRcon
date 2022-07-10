@@ -27,18 +27,33 @@ func NewHandlers(r *Repository) {
 	Repo = r
 }
 
+//Home renders the home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "home.page.go.tmpl", &models.TemplateData{ActivePage: "Home"})
 }
 
+//Dashboard renders the Dashboard page - containing data pulled from RCON
 func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard"})
+	playercount, playerlist, err := Repo.App.Rcon.GetPlayers()
+	if err != nil {
+		fmt.Println("Error with loading player list", err)
+	}
+
+	stringMap := make(map[string]string)
+	stringMap["playercount"] = fmt.Sprintf("%d", playercount)
+
+	data := make(map[string]interface{})
+	data["players"] = playerlist
+
+	render.RenderTemplate(w, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard",
+		StringMap: stringMap, DataMap: data})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "about.page.go.tmpl", &models.TemplateData{ActivePage: "About"})
 }
 
+//Players renders the Players page - containing data pulled from RCON
 func (m *Repository) Players(w http.ResponseWriter, r *http.Request) {
 	playercount, playerlist, err := Repo.App.Rcon.GetPlayers()
 	if err != nil {

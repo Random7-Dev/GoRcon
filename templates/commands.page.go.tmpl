@@ -1,17 +1,54 @@
 {{template "base" .}}
 {{define "content"}}
-<div class="col-xl-4 col-lg-12">
-    <div class="card card-chart" >
-        <div class="card-header card-header-info">
-            <h3 class="card-title text-center"><i class="material-icons">terminal</i>Commands</h3>
-            <p class="card-category"> send a custom command to the server</p>
-        </div>
-        <div class="card-body">
+<h1>Commands</h1>
+<div class="row">
+    <div class="col-xl-4 col-lg-12">
+        <div class="card card-chart">
+            <div class="card-header card-header-info">
+                <h3 class="card-title text-center"><i class="material-icons">terminal</i> Custom Commands</h3>
+                <p class="card-category">Send a custom command to the server.</p>
+            </div>
+            <div class="card-body">
 
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <p class="card-category">Used to send custom RCON commands to the server.</p>
+                </div>
+            </div>
         </div>
-        <div class="card-footer">
-            <div class="stats">
-                
+    </div>
+    <div class="col-xl-4 col-lg-12">
+
+        <div class="card card-chart">
+            <div class="card-header card-header-success">
+                <h3 class="card-title text-center"><i class="material-icons">add_comment</i> Whitelist</h3>
+                <p class="card-category">Whitelist a new user to the server.</p>
+            </div>
+            <div class="card-body">
+
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <p class="card-category">Add users to the servers Whitelist.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-12">
+
+        <div class="card card-chart">
+            <div class="card-header card-header-danger">
+                <h3 class="card-title text-center"><i class="material-icons">stop_circle</i> Stop Server</h3>
+                <p class="card-category">Send a stop server command.</p>
+            </div>
+            <div class="card-body">
+
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <p class="card-category">Sends the Stop command to the server turning it off.</p>
+                </div>
             </div>
         </div>
     </div>
