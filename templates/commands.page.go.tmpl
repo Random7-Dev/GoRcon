@@ -6,10 +6,16 @@
         <div class="card card-chart">
             <div class="card-header card-header-info">
                 <h3 class="card-title text-center"><i class="material-icons">terminal</i> Custom Commands</h3>
-                <p class="card-category">Send a custom command to the server.</p>
+                <p class="card-category">Send a custom command to the server. Enter with out the "/"</p>
             </div>
             <div class="card-body">
-
+                <form action="" method="post">
+                    <div class="mb-3 mt-3">
+                      <label for="customCommand" class="form-label">Enter Custom Command:</label>
+                      <input name="customCommand" id="customCommand" type="text" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-info">Submit</button>
+                  </form>
             </div>
             <div class="card-footer">
                 <div class="stats">
@@ -19,14 +25,19 @@
         </div>
     </div>
     <div class="col-xl-4 col-lg-12">
-
         <div class="card card-chart">
             <div class="card-header card-header-success">
-                <h3 class="card-title text-center"><i class="material-icons">add_comment</i> Whitelist</h3>
-                <p class="card-category">Whitelist a new user to the server.</p>
+                <h3 class="card-title text-center"><i class="material-icons">add_comment</i> Add to Whitelist</h3>
+                <p class="card-category">Enter a username or UUID to Whitelist</p>
             </div>
             <div class="card-body">
-
+                <form action="" method="post">
+                    <div class="mb-3 mt-3">
+                      <label for="whitelist" class="form-label">Enter username to Whitelist:</label>
+                      <input name="whitelist" id="whitelist" type="text" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                  </form>
             </div>
             <div class="card-footer">
                 <div class="stats">
@@ -36,18 +47,28 @@
         </div>
     </div>
     <div class="col-xl-4 col-lg-12">
-
         <div class="card card-chart">
             <div class="card-header card-header-danger">
-                <h3 class="card-title text-center"><i class="material-icons">stop_circle</i> Stop Server</h3>
-                <p class="card-category">Send a stop server command.</p>
+                <h3 class="card-title text-center"><i class="material-icons">stop_circle</i> Restart Server</h3>
+                <p class="card-category">Select the restart server checkbox and hit restart server to restrart the server.</p>
             </div>
             <div class="card-body">
-
+                <form action="" method="post">
+                    <div class="form-check mb-3 mt-3">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="">
+                            Restart Server
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-danger mb-3 mt-3">Restart</button>
+                  </form>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <p class="card-category">Sends the Stop command to the server turning it off.</p>
+                    <p class="card-category">Sends the Stop command to the server turning it off and prompts a startup</p>
                 </div>
             </div>
         </div>
