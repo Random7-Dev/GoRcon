@@ -1,4 +1,28 @@
 {{template "base" .}}
 {{define "content"}}
 <h1>Players</h1>
+<div class="col-xl-4 col-lg-12">
+    <div class="card card-chart">
+        <div class="card-title">
+            <h2 class="text-info"><i class="material-icons">format_list_bulleted</i> Online Players</h2>
+        </div>
+        <div class="card-body">
+            {{$players := index .DataMap "players"}}
+            {{range $players}}
+            <li>
+            <p class="card-category">
+                <span class="text-success">{{.}}</span>
+            </p>
+            </li>
+            {{end}}
+        </div>
+        <div class="card-footer">
+            <div class="stats">
+                <p class="card-category">
+                    <span class="text-muted">Currently {{index .StringMap "playercount"}} players online</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 {{end}}

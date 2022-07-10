@@ -40,24 +40,24 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Players(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "players.page.go.tmpl", &models.TemplateData{ActivePage: "Players"})
-}
-
-func (m *Repository) Commands(w http.ResponseWriter, r *http.Request) {
 	playercount, playerlist, err := Repo.App.Rcon.GetPlayers()
 	if err != nil {
 		fmt.Println("Error with loading player list", err)
 	}
+
 	stringMap := make(map[string]string)
 	stringMap["playercount"] = fmt.Sprintf("%d", playercount)
 
 	data := make(map[string]interface{})
 	data["players"] = playerlist
 
-	fmt.Println(data)
-
-	render.RenderTemplate(w, "commands.page.go.tmpl", &models.TemplateData{ActivePage: "Commands",
+	render.RenderTemplate(w, "players.page.go.tmpl", &models.TemplateData{ActivePage: "Players",
 		StringMap: stringMap, DataMap: data})
+}
+
+func (m *Repository) Commands(w http.ResponseWriter, r *http.Request) {
+
+	render.RenderTemplate(w, "commands.page.go.tmpl", &models.TemplateData{ActivePage: "Commands"})
 }
 
 func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
