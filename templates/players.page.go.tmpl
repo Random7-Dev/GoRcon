@@ -1,10 +1,10 @@
 {{template "base" .}}
 {{define "content"}}
-<h1>Players</h1>
 <div class="col-xl-4 col-lg-12">
-    <div class="card card-chart">
-        <div class="card-title">
-            <h2 class="text-info"><i class="material-icons">format_list_bulleted</i> Online Players</h2>
+    <div class="card card-chart" >
+        <div class="card-header card-header-info">
+            <h3 class="card-title text-center"><i class="material-icons">list_alt</i>Players</h3>
+            <p class="card-category">Currently connected players</p>
         </div>
         <div class="card-body">
             {{$players := index .DataMap "players"}}
