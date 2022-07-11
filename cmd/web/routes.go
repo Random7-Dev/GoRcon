@@ -16,7 +16,7 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	router.Use(middleware.Recoverer)
 	//Extra packages middleware
 	router.Use(SessionLoad)
-	router.Use(NoSurf)
+	//router.Use(NoSurf)
 	//Routes
 	//-Get
 	router.Get("/", handlers.Repo.Home)
@@ -28,7 +28,7 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	router.Get("/login", handlers.Repo.Login)
 	router.Get("/logout", handlers.Repo.Logout)
 	//-Post
-	router.Post("/kick", handlers.Repo.PostKick)
+	router.Post("/PlayerCommands", handlers.Repo.PostSendCommand)
 	//Static files
 	fileServer := http.FileServer(http.Dir("./static/"))
 	router.Handle("/static/*", http.StripPrefix("/static", fileServer))
