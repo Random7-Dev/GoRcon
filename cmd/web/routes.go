@@ -18,6 +18,7 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	router.Use(SessionLoad)
 	router.Use(NoSurf)
 	//Routes
+	//-Get
 	router.Get("/", handlers.Repo.Home)
 	router.Get("/dashboard", handlers.Repo.Dashboard)
 	router.Get("/about", handlers.Repo.About)
@@ -26,6 +27,8 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	router.Get("/admin", handlers.Repo.Admin)
 	router.Get("/login", handlers.Repo.Login)
 	router.Get("/logout", handlers.Repo.Logout)
+	//-Post
+	router.Post("/kick", handlers.Repo.PostKick)
 	//Static files
 	fileServer := http.FileServer(http.Dir("./static/"))
 	router.Handle("/static/*", http.StripPrefix("/static", fileServer))
