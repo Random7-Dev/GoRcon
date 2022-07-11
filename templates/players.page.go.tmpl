@@ -9,6 +9,14 @@
                 <p class="card-category"> Currently online players.</p>
             </div>
             <div class="card-body">
+                {{$players := index .DataMap "players"}}
+                {{if not $players}}
+                <div class="stats">
+                    <p class="card-category">
+                        <span class="text-muted">Currently no players online</span>
+                    </p>
+                </div>
+                {{else}}
                 <div class="table-responsive">
                     <table class="table table-striped table-dark">
                         <thead>
@@ -34,7 +42,6 @@
                             </th>
                         </thead>
                         <tbody>
-                            {{$players := index .DataMap "players"}}
                             {{range $players}}
                             <tr>
                                 <td>
@@ -71,16 +78,16 @@
                             {{end}}
                         </tbody>
                     </table>
+                    {{end}}
                 </div>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <p class="card-category">
-                        <span class="text-muted">Currently {{index .StringMap "playercount"}} players online</span>
-                    </p>
+                <div class="card-footer">
+                    <div class="stats">
+                        <p class="card-category">
+                            <span class="text-muted">Currently {{index .StringMap "playercount"}} players online</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-{{end}}
+    {{end}}

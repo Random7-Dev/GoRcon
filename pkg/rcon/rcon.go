@@ -56,6 +56,11 @@ func (r *Connection) GetPlayers() (int, []string, error) {
 	resp := strings.Split(response, ":")   // split at colon "There are 2/20 players online:Random777, Dude1872"
 	players := strings.Split(resp[1], ",") //split at comma "Random777, Dude1872"
 
+	if len(resp[1]) == 0 {
+		fmt.Println("GetPlayers returns: Count = ", 0, "Players = ", nil, "Error = ", nil)
+		return 0, nil, nil
+	}
+	fmt.Println("GetPlayers returns: Count = ", len(players), "Players = ", players, "Error = ", nil)
 	return len(players), players, nil
 }
 

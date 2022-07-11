@@ -43,7 +43,11 @@ func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
 	stringMap["playercount"] = fmt.Sprintf("%d", playercount)
 
 	data := make(map[string]interface{})
-	data["players"] = playerlist
+	if len(playerlist) > 0 {
+		data["players"] = playerlist
+	} else {
+		data["players"] = "empty"
+	}
 	data["rconStatus"] = m.App.Rcon.ConnectionStatus
 
 	render.RenderTemplate(w, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard",
