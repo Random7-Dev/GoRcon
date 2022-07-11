@@ -19,7 +19,7 @@ func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-
+	//TODO send a JSON response and display in a modal
 	switch data.Command {
 	case "Kick":
 		fmt.Println(data.Command, " command found - Player is: ", data.Player)

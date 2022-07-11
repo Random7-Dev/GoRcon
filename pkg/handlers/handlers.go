@@ -29,7 +29,7 @@ func NewHandlers(r *Repository) {
 
 //Home renders the home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "home.page.go.tmpl", &models.TemplateData{ActivePage: "Home"})
+	render.RenderTemplate(w, r, "home.page.go.tmpl", &models.TemplateData{ActivePage: "Home"})
 }
 
 //Dashboard renders the Dashboard page - containing data pulled from RCON
@@ -50,12 +50,12 @@ func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
 	}
 	data["rconStatus"] = m.App.Rcon.ConnectionStatus
 
-	render.RenderTemplate(w, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard",
+	render.RenderTemplate(w, r, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard",
 		StringMap: stringMap, DataMap: data})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "about.page.go.tmpl", &models.TemplateData{ActivePage: "About"})
+	render.RenderTemplate(w, r, "about.page.go.tmpl", &models.TemplateData{ActivePage: "About"})
 }
 
 //Players renders the Players page - containing data pulled from RCON
@@ -71,22 +71,22 @@ func (m *Repository) Players(w http.ResponseWriter, r *http.Request) {
 	data := make(map[string]interface{})
 	data["players"] = playerlist
 
-	render.RenderTemplate(w, "players.page.go.tmpl", &models.TemplateData{ActivePage: "Players",
+	render.RenderTemplate(w, r, "players.page.go.tmpl", &models.TemplateData{ActivePage: "Players",
 		StringMap: stringMap, DataMap: data})
 }
 
 func (m *Repository) Commands(w http.ResponseWriter, r *http.Request) {
 
-	render.RenderTemplate(w, "commands.page.go.tmpl", &models.TemplateData{ActivePage: "Commands"})
+	render.RenderTemplate(w, r, "commands.page.go.tmpl", &models.TemplateData{ActivePage: "Commands"})
 }
 
 func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "login.page.go.tmpl", &models.TemplateData{ActivePage: "Login"})
+	render.RenderTemplate(w, r, "login.page.go.tmpl", &models.TemplateData{ActivePage: "Login"})
 }
 
 func (m *Repository) Logout(w http.ResponseWriter, r *http.Request) {
 	//redirect to "/"
 }
 func (m *Repository) Admin(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "admin.page.go.tmpl", &models.TemplateData{ActivePage: "Admin"})
+	render.RenderTemplate(w, r, "admin.page.go.tmpl", &models.TemplateData{ActivePage: "Admin"})
 }

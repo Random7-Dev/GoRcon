@@ -40,6 +40,7 @@
                             </th>
                         </thead>
                         <tbody>
+                            {{$token := .CSRFToken}}
                             {{range $players}}
                             <tr>
                                 <td>
@@ -49,27 +50,27 @@
                                 </td>
                                 <td>
                                     <div class="col text-center">
-                                        <button id="TPSpawn-{{.}}" type="submit" class="btn btn-info" onclick="SendCommand(id)">TP to Spawn</button>
+                                        <button id="TPSpawn-{{.}}" type="submit" class="btn btn-info" onclick="SendCommand(id,{{$token}})">TP to Spawn</button>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="col text-center">
-                                        <button id="TPWorld0-{{.}}" type="submit" class="btn btn-success" onclick="SendCommand(id)">TPX to Dimension 0</button>
+                                        <button id="TPWorld0-{{.}}" type="submit" class="btn btn-success" onclick="SendCommand(id,{{$token}})">TPX to Dimension 0</button>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="col text-center">
-                                        <button id="TPHome-{{.}}" type="submit" class="btn btn-primary" onclick="SendCommand(id)">TP to players home</button>
+                                        <button id="TPHome-{{.}}" type="submit" class="btn btn-primary" onclick="SendCommand(id,{{$token}})">TP to players home</button>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="col text-center">
-                                        <button id="TPDeath-{{.}}" type="submit" class="btn btn-warning" onclick="SendCommand(id)">TP to players death point</button>
+                                        <button id="TPDeath-{{.}}" type="submit" class="btn btn-warning" onclick="SendCommand(id,{{$token}})">TP to players death point</button>
                                     </div>
                                 </td>
                                 <td class="text-danger">
                                     <div class="col text-center">
-                                        <button id="Kick-{{.}}" type="submit" class="btn btn-danger" onclick="SendCommand(id)">Kick</button>
+                                        <button id="Kick-{{.}}" type="submit" class="btn btn-danger" onclick="SendCommand(id,{{$token}})">Kick</button>
                                     </div>
                                 </td>
                             </tr>

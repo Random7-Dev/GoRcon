@@ -10,6 +10,7 @@ import (
 
 	"github.com/Random-7/GoRcon/pkg/config"
 	"github.com/Random-7/GoRcon/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 var functions = template.FuncMap{}
@@ -21,11 +22,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefualtData(templateDate *models.TemplateData) *models.TemplateData {
+func AddDefualtData(templateDate *models.TemplateData, r *http.Request) *models.TemplateData {
+	templateDate.CSRFToken = nosurf.Token(r)
 	return templateDate
 }
 
-func RenderTemplate(w http.ResponseWriter, tmpl string, templateData *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, templateData *models.TemplateData) {
 
 	var templateCache map[string]*template.Template
 	if app.UseCache {
@@ -42,7 +44,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, templateData *models.Tem
 	}
 
 	buffer := new(bytes.Buffer)
-	templateData = AddDefualtData(templateData)
+	templateData = AddDefualtData(templateData, r)
 	_ = t.Execute(buffer, templateData)
 
 	_, err := buffer.WriteTo(w)

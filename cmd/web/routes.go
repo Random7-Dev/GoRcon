@@ -16,7 +16,7 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	router.Use(middleware.Recoverer)
 	//Extra packages middleware
 	router.Use(SessionLoad)
-	//router.Use(NoSurf)
+	router.Use(NoSurf)
 	//Routes
 	//-Get
 	router.Get("/", handlers.Repo.Home)
