@@ -30,12 +30,10 @@ func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
 		m.App.Rcon.SendCommand(fmt.Sprintf("kick %s", data.Player))
 	case "TPSpawn":
 		fmt.Println(data.Command, "command found - Player is:", data.Player)
-	case "TPWorld0":
-		fmt.Println(data.Command, "command found - Player is:", data.Player)
+		m.App.Rcon.SendCommand(fmt.Sprintf("/tbteleport %s -111 112 162 0", data.Player))
 	case "TPHome":
 		fmt.Println(data.Command, "command found - Player is:", data.Player)
-	case "TPDeath":
-		fmt.Println(data.Command, "command found - Player is:", data.Player)
+		m.App.Rcon.SendCommand(fmt.Sprintf("/tbteleporthome %s", data.Player))
 	}
 
 }

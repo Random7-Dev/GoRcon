@@ -90,19 +90,19 @@ func (r *Connection) StopServer() error {
 	return nil
 }
 
-// [18:08:03] [Server thread/INFO]: §2--- Showing help page §r§255§r§2 of §r§259§r§2 (/help <page>) ---§r
-// [18:08:03] [Server thread/INFO]: Shows the position of the last known grave of a player
+// §2--- Showing help page §r§255§r§2 of §r§259§r§2 (/help <page>) ---§r
+//  Shows the position of the last known grave of a player
 // /tbshowlastgrave [player]§r
-// [18:08:03] [Server thread/INFO]: Launches a village siege in the chosen dimension or your current one
+//  Launches a village siege in the chosen dimension or your current one
 // /tbsiege [dim]§r
-// [18:08:03] [Server thread/INFO]: Dimensional teleport
+//  Dimensional teleport
 // /tbteleport [entity] <destination>
 // <destination> = <targetEntity> or <x> <y> <z> [dim]§r
-// [18:08:03] [Server thread/INFO]: Teleports to your last death location
+//  Teleports to your last death location
 // /tbteleportdeath§r
-// [18:08:03] [Server thread/INFO]: Teleports to an unexplored structure
+//  Teleports to an unexplored structure
 // /tbteleportdiscovery <entity> [structure] [dim]§r
-// [18:08:03] [Server thread/INFO]: Teleports to the last known grave of a player
+//  Teleports to the last known grave of a player
 // /tbteleportgrave [player] [playerGrave]§r
-// [18:08:03] [Server thread/INFO]: Teleports to the respawn point of a player
+//  Teleports to the respawn point of a player
 // /tbteleporthome [player] [target]§r
