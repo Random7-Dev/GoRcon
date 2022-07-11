@@ -1,4 +1,28 @@
 {{template "base" .}}
 {{define "content"}}
-<h1>About</h1>
+<div class="row">
+    <div class="col-xl-4 col-lg-12">
+        <div class="card card-chart">
+            <div class="card-header card-header-info">
+                <h3 class="card-title text-center"><i class="material-icons">terminal</i> About</h3>
+                <p class="card-category"> Personal project I made for fun and learning.</p>
+            </div>
+            <div class="card-body text-center">
+                <p class="mt-3">GoRcon is a Web App written in Go, with the use of HTML/CSS and JS</p>
+                <p > Utilizing the following Go Modules:</p>
+                <ul class="text-left">
+                    <li>Chi-Router</li>
+                    <li><a href="github.com/Kelwing/mc-rcon">mcrcon</a></li>
+                    <li>SCS</li>
+                    <li>NoSurf</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <div class="stats">
+                    <p class="card-category">Made By Jon Fingas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {{end}}
