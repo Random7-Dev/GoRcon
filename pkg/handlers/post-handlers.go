@@ -11,7 +11,11 @@ type PlayerCommands struct {
 	Player  string `json:"player"`
 }
 
-//PostKick sends the rcon command to kick selected player
+type CustomCommand struct {
+	Command string `json:"command"`
+}
+
+//PostSendCommand retrieves the command and effected player and send the proper request to the Rcon based on the values
 func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
 	data := new(PlayerCommands)
 	decoder := json.NewDecoder(r.Body)
@@ -33,5 +37,10 @@ func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
 	case "TPDeath":
 		fmt.Println(data.Command, "command found - Player is:", data.Player)
 	}
+
+}
+
+//PostSendCustomCommand retreives the custom command from the form.
+func (m *Repository) PostSendCustomCommand(w http.ResponseWriter, r *http.Request) {
 
 }

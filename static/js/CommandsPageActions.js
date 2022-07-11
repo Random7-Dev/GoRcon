@@ -1,15 +1,10 @@
-function SendCommand(ActionPlayer, token) {
-    let splitString = ActionPlayer.split("-");
-    
-    splitString[0]=  splitString[0].trim();
-    splitString[1] = splitString[1].trim();
+function SendCustomCommand(ActionPlayer, token) {
 
-    fetch("/PlayerCommands", {
+    fetch("/CustomCommands", {
         method: "POST",
         
         body: JSON.stringify({
-            command: splitString[0],
-            player: splitString[1]
+            command: ActionPlayer
         }),
 
         headers: {
@@ -20,4 +15,13 @@ function SendCommand(ActionPlayer, token) {
     })
     .then(Response => Response.json)
     .then(json => console.log(json));
+}
+
+//use form data
+function SendAddToWhitelist(player) {
+
+}
+
+function SendRestartServer() {
+    
 }
