@@ -20,6 +20,7 @@ var app config.AppConfig
 func main() {
 	//InProduction
 	app.InProduction = false
+	app.Version = "0.1alpha"
 
 	//Setup session and store in appconfig
 	app.Session = scs.New()
