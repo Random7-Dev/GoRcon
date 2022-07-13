@@ -59,6 +59,10 @@ func SetupRconConnection() {
 	rcon.Password = "spldrconmc2022"
 	//pass into appconfig
 	app.Rcon = *rcon
-	app.Rcon.SetupConnection()
+	err := app.Rcon.SetupConnection()
+	if err != nil {
+		app.Rcon.ConnectionStatus = false
+		fmt.Println(err)
+	}
 
 }

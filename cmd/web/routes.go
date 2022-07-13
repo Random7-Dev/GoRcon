@@ -29,6 +29,10 @@ func setupRouter(app *config.AppConfig) http.Handler {
 	router.Get("/logout", handlers.Repo.Logout)
 	//-Post
 	router.Post("/PlayerCommands", handlers.Repo.PostSendCommand)
+
+	router.Post("/commands/restartform", handlers.Repo.PostRestart)
+	router.Post("/commands/whitelistform", handlers.Repo.PostWhitelist)
+	router.Post("/commands/customform", handlers.Repo.PostCustom)
 	//Static files
 	fileServer := http.FileServer(http.Dir("./static/"))
 	router.Handle("/static/*", http.StripPrefix("/static", fileServer))

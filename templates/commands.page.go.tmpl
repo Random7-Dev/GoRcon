@@ -9,13 +9,14 @@
                 <p class="card-category">Send a custom command to the server. Enter with out the "/"</p>
             </div>
             <div class="card-body">
-                <form action="" method="post">
-                    <div class="mb-3 mt-3">
-                      <label for="customCommand" class="form-label">Enter Custom Command:</label>
-                      <input name="customCommand" id="customCommand" type="text" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-info">Submit</button>
+                <div class="mb-3 mt-3">
+                <form  id="CustomForm" action="/commands/customform" method="post">
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                    <label for="customCommand" class="form-label">Enter Custom Command:</label>
+                    <input name="customCommand" id="customCommand" type="text" class="form-control">
+                    <button type="submit" class="btn btn-info" onclick="SendCustomCommand('CustomForm')">Submit</button>
                   </form>
+                </div>
             </div>
             <div class="card-footer">
                 <div class="stats">
@@ -31,12 +32,13 @@
                 <p class="card-category">Enter a username or UUID to Whitelist</p>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form id="WhitelistForm" action="/commands/whitelistform" method="POST" >
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                     <div class="mb-3 mt-3">
                       <label for="whitelist" class="form-label">Enter username to Whitelist:</label>
                       <input name="whitelist" id="whitelist" type="text" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success" onclick="SendCustomCommand('WhitelistForm')">Submit</button>
                   </form>
             </div>
             <div class="card-footer">
@@ -53,17 +55,18 @@
                 <p class="card-category">Select the restart server checkbox and hit restart server to restrart the server.</p>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form id="RestartForm" action="/commands/restartform" method="post">
+                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                     <div class="form-check mb-3 mt-3">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="">
+                            <input name="restartServer" id="restartServer" class="form-check-input" type="checkbox" value="">
                             Restart Server
                             <span class="form-check-sign">
                                 <span class="check"></span>
                             </span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-danger mb-3 mt-3">Restart</button>
+                    <button type="submit" class="btn btn-danger mb-3 mt-3" onclick="SendCustomCommand('RestartForm')">Restart</button>
                   </form>
             </div>
             <div class="card-footer">
@@ -74,4 +77,7 @@
         </div>
     </div>
 </div>
+{{end}}
+{{define "js"}}
+<script src="/static/js/CommandsPageActions.js"></script>
 {{end}}

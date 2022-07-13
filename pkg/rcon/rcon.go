@@ -14,10 +14,13 @@ type Connection struct {
 	Rcon             mcrcon.MCConn
 }
 
-func (r *Connection) Connection() {
+func ConnectionTest(r *Connection) {
 	if r.ConnectionStatus {
+		fmt.Println("Rcon status connected")
 		return
 	} else {
+		fmt.Println("Rcon status disconnected, setting up.")
+
 		err := r.SetupConnection()
 		if err != nil {
 			fmt.Println("Error setting up rcon:", err)
@@ -45,8 +48,13 @@ func (r *Connection) SetupConnection() error {
 	return nil
 }
 
+func (r *Connection) DisconnectRcon() {
+	r.ConnectionStatus = false
+	r.Rcon.Close()
+}
+
 func (r *Connection) GetPlayers() (int, []string, error) {
-	r.Connection() // test conneection?
+	ConnectionTest(r) // test conneection?
 
 	response, err := r.Rcon.SendCommand("list")
 	if err != nil {
@@ -64,7 +72,7 @@ func (r *Connection) GetPlayers() (int, []string, error) {
 }
 
 func (r *Connection) SendCommand(cmd string) (string, error) {
-	r.Connection() // test conneection?
+	ConnectionTest(r) // test conneection?
 
 	response, err := r.Rcon.SendCommand(cmd)
 	if err != nil {
@@ -76,7 +84,7 @@ func (r *Connection) SendCommand(cmd string) (string, error) {
 }
 
 func (r *Connection) StopServer() error {
-	r.Connection() // test conneection?
+	ConnectionTest(r) // test conneection?
 
 	r.SendCommand("say Shutting server down")
 	_, err := r.Rcon.SendCommand("stop")

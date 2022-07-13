@@ -18,6 +18,6 @@ function SendCommand(ActionPlayer, token) {
 
         }
     })
-    .then(Response => Response.json)
-    .then(json => console.log(json));
+    .then(Response => Response.json())
+    .then(json => console.log(json.message));
 }
