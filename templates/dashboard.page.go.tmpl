@@ -65,13 +65,11 @@
             </div>
             <div class="card-body">
                 {{$players := index .DataMap "players"}}
-                {{range $players}}
-                <li>
+                {{range $players}}<li>
                     <p class="card-category">
                         <span class="text-success">{{.}}</span>
                     </p>
-                </li>
-                {{end}}
+                </li>{{end}}
             </div>
             <div class="card-footer">
                 <div class="stats">
@@ -101,5 +99,4 @@
         </div>
     </div>
 </div>
-
 {{end}}
