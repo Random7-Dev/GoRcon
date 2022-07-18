@@ -1,9 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/Random-7/GoRcon/pkg/config"
@@ -17,7 +20,22 @@ const portNumber = ":8080"
 
 var app config.AppConfig
 
+type configFile struct {
+	RconIP   string `json:"rconIP"`
+	RconPass string `json:"rconPass"`
+	DbIP     string `json:"dbIP"`
+	DbPass   string `json:"dbPass"`
+	Cache    bool   `json:"cache"`
+}
+
 func main() {
+
+	fileConfig, err := parseConfig()
+	if err != nil {
+		log.Fatal("cannot read config")
+	}
+	fmt.Println(fileConfig)
+
 	//InProduction
 	app.InProduction = false
 	app.Version = "0.1alpha"
@@ -39,10 +57,10 @@ func main() {
 	handlers.NewHandlers(repo)
 	//Pass the AppConfig to the render so it can update the template cache
 	app.TemplateCache = tc
-	app.UseCache = false
+	app.UseCache = fileConfig.Cache
 	render.NewTemplates(&app)
 
-	go SetupRconConnection()
+	go SetupRconConnection(fileConfig.RconIP, fileConfig.RconPass)
 
 	fmt.Println("Starting Webserver on", portNumber)
 	srv := &http.Server{
@@ -52,11 +70,11 @@ func main() {
 	_ = srv.ListenAndServe()
 }
 
-func SetupRconConnection() {
+func SetupRconConnection(ip string, password string) {
 	//Setup rcon conneciton
 	rcon := new(rcon.Connection)
-	rcon.Ip = "10.0.50.50:25575"
-	rcon.Password = "spldrconmc2022"
+	rcon.Ip = ip
+	rcon.Password = password
 	//pass into appconfig
 	app.Rcon = *rcon
 	err := app.Rcon.SetupConnection()
@@ -65,4 +83,19 @@ func SetupRconConnection() {
 		fmt.Println(err)
 	}
 
+}
+
+func parseConfig() (configFile, error) {
+	var config configFile
+	jsonFile, err := os.Open("config.json")
+	if err != nil {
+		log.Fatal("cannot open config.json")
+		return configFile{}, err
+	}
+	fmt.Println("Opened JSON File")
+	defer jsonFile.Close()
+
+	bytevalue, _ := ioutil.ReadAll(jsonFile)
+	json.Unmarshal(bytevalue, &config)
+	return config, nil
 }
