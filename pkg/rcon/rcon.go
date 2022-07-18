@@ -17,9 +17,11 @@ type Connection struct {
 func ConnectionTest(r *Connection) {
 	if r.ConnectionStatus {
 		fmt.Println("Rcon status connected")
+		r.ConnectionStatus = true
 		return
 	} else {
 		fmt.Println("Rcon status disconnected, setting up.")
+		r.ConnectionStatus = false
 
 		err := r.SetupConnection()
 		if err != nil {

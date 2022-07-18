@@ -19,5 +19,8 @@ function SendCommand(ActionPlayer, token) {
         }
     })
     .then(Response => Response.json())
-    .then(json => console.log(json.message));
+    .then(json => {
+        console.log(json.message)
+        console.log(json.command)
+    });
 }

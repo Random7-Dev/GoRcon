@@ -12,7 +12,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col text-center">
-                        <p class="text-success text-center">Rcon is Connected</p>
+                        {{if eq ($rconStatus) true}}<p class="text-success text-center">Rcon is Connected</p>
+                        {{else}}<p class="text-danger text-center">Rcon is Disconnected</p>{{end}}
                     </div>
                 </div>
                 <div class="row">

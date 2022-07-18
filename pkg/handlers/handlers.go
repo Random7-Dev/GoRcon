@@ -34,21 +34,33 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 
 //Dashboard renders the Dashboard page - containing data pulled from RCON
 func (m *Repository) Dashboard(w http.ResponseWriter, r *http.Request) {
-	playercount, playerlist, err := Repo.App.Rcon.GetPlayers()
-	if err != nil {
-		fmt.Println("Error with loading player list", err)
-	}
-
-	stringMap := make(map[string]string)
-	stringMap["playercount"] = fmt.Sprintf("%d", playercount)
 
 	data := make(map[string]interface{})
-	if len(playerlist) > 0 {
-		data["players"] = playerlist
+	stringMap := make(map[string]string)
+
+	if m.App.Rcon.ConnectionStatus {
+		playercount, playerlist, err := Repo.App.Rcon.GetPlayers()
+		if err != nil {
+			fmt.Println("Error with loading player list", err)
+		}
+		stringMap["playercount"] = fmt.Sprintf("%d", playercount)
+		if len(playerlist) > 0 {
+			data["players"] = playerlist
+		} else {
+			data["players"] = "empty"
+		}
+		data["rconStatus"] = m.App.Rcon.ConnectionStatus
 	} else {
-		data["players"] = "empty"
+		data["rconStatus"] = m.App.Rcon.ConnectionStatus
+		go func() {
+			m.App.Rcon.ConnectionStatus = false
+			err := m.App.Rcon.SetupConnection()
+			if err != nil {
+				fmt.Println("Error setting up RCON", err)
+			}
+		}()
+
 	}
-	data["rconStatus"] = m.App.Rcon.ConnectionStatus
 
 	render.RenderTemplate(w, r, "dashboard.page.go.tmpl", &models.TemplateData{ActivePage: "Dashboard",
 		StringMap: stringMap, DataMap: data})
@@ -60,17 +72,28 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 //Players renders the Players page - containing data pulled from RCON
 func (m *Repository) Players(w http.ResponseWriter, r *http.Request) {
-	playercount, playerlist, err := Repo.App.Rcon.GetPlayers()
-	if err != nil {
-		fmt.Println("Error with loading player list", err)
-	}
-
-	stringMap := make(map[string]string)
-	stringMap["playercount"] = fmt.Sprintf("%d", playercount)
-
 	data := make(map[string]interface{})
-	data["players"] = playerlist
+	stringMap := make(map[string]string)
 
+	if m.App.Rcon.ConnectionStatus {
+		playercount, playerlist, err := Repo.App.Rcon.GetPlayers()
+		if err != nil {
+			fmt.Println("Error with loading player list", err)
+		}
+
+		stringMap["playercount"] = fmt.Sprintf("%d", playercount)
+		data["players"] = playerlist
+	} else {
+		data["players"] = nil
+		go func() {
+			m.App.Rcon.ConnectionStatus = false
+			err := m.App.Rcon.SetupConnection()
+			if err != nil {
+				fmt.Println("Error setting up RCON", err)
+			}
+		}()
+
+	}
 	render.RenderTemplate(w, r, "players.page.go.tmpl", &models.TemplateData{ActivePage: "Players",
 		StringMap: stringMap, DataMap: data})
 }

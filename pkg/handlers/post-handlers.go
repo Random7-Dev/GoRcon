@@ -16,12 +16,13 @@ type CustomCommand struct {
 }
 
 type Response struct {
-	Command string `json:"commad"`
+	Command string `json:"command"`
 	Message string `json:"message"`
 }
 
 //PostSendCommand retrieves the command and effected player and send the proper request to the Rcon based on the values
 func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
+	
 	data := new(PlayerCommands)
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&data)

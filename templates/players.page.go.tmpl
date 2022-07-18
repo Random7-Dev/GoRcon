@@ -2,14 +2,16 @@
 {{define "content"}}
 <div class="row">
     <h1>Players</h1>
+    {{$players := index .DataMap "players"}}
     <div class="col-md-12">
         <div class="card  card-chart">
-            <div class="card-header card-header-success">
+            {{if not $players}}<div class="card-header card-header-success">
+            {{else}}<div class="card-header card-header-warning">{{end}}
                 <h3 class="card-title text-center"><i class="material-icons">list_alt</i> Online Players</h3>
-                <p class="card-category"> Currently online players.</p>
+                {{if not $players}}<p class="card-category"> Currently online players.</p>
+                {{else}}<p class="card-category"> Currently no players online.</p>{{end}}
             </div>
             <div class="card-body">
-                {{$players := index .DataMap "players"}}
                 {{if not $players}}
                 <div class="stats">
                     <p> Currently no players online</p>

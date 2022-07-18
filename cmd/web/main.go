@@ -42,7 +42,7 @@ func main() {
 	app.UseCache = false
 	render.NewTemplates(&app)
 
-	SetupRconConnection()
+	go SetupRconConnection()
 
 	fmt.Println("Starting Webserver on", portNumber)
 	srv := &http.Server{
