@@ -60,7 +60,7 @@ func main() {
 	app.UseCache = fileConfig.Cache
 	render.NewTemplates(&app)
 
-	go SetupRconConnection(fileConfig.RconIP, fileConfig.RconPass)
+	go setupRconConnection(fileConfig.RconIP, fileConfig.RconPass)
 
 	fmt.Println("Starting Webserver on", portNumber)
 	srv := &http.Server{
@@ -70,7 +70,7 @@ func main() {
 	_ = srv.ListenAndServe()
 }
 
-func SetupRconConnection(ip string, password string) {
+func setupRconConnection(ip string, password string) {
 	//Setup rcon conneciton
 	rcon := new(rcon.Connection)
 	rcon.Ip = ip
