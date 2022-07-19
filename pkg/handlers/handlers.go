@@ -94,6 +94,9 @@ func (m *Repository) Players(w http.ResponseWriter, r *http.Request) {
 		}()
 
 	}
+
+	data["rconStatus"] = m.App.Rcon.ConnectionStatus
+
 	render.RenderTemplate(w, r, "players.page.go.tmpl", &models.TemplateData{ActivePage: "Players",
 		StringMap: stringMap, DataMap: data})
 }

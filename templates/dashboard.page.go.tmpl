@@ -8,7 +8,7 @@
             <div class="card-header {{if eq ($rconStatus) true}}card-header-success{{else}}card-header-danger{{end}}">
                 <h3 class="card-title text-center"><i class="material-icons">hub</i> Rcon Status</h3>
                 <p class="card-category">Current Rcon status {{if eq ($rconStatus) true}}Connected{{else}}Disconnected{{end}}</p>
-            </div>
+            </div> 
             <div class="card-body">
                 <div class="row">
                     <div class="col text-center">
@@ -26,8 +26,7 @@
             <div class="card-footer">
                 <div class="stats">
                     <p class="card-category">
-                        <span class="text-muted">Currently the Rcon connection status is: {{index .StringMap
-                            "playercount"}}</span>
+                        <span class="text-muted">Currently the Rcon connection status is: {{index .StringMap "playercount"}}</span>
                     </p>
                 </div>
             </div>
@@ -45,7 +44,7 @@
 
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="card-footer">
                 <div class="stats">
                     <p class="card-category">
@@ -56,6 +55,7 @@
         </div>
     </div>
 </div>
+{{$players := index .DataMap "players"}}
 <div class="row">
     <div class="col-xl-4 col-lg-12">
         <div class="card card-chart">
@@ -64,12 +64,13 @@
                 <p class="card-category">Currently connected players</p>
             </div>
             <div class="card-body">
-                {{$players := index .DataMap "players"}}
-                {{range $players}}<li>
+                {{range $players}}
+                <li>
                     <p class="card-category">
                         <span class="text-success">{{.}}</span>
                     </p>
-                </li>{{end}}
+                </li>
+                {{end}}
             </div>
             <div class="card-footer">
                 <div class="stats">

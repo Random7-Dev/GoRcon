@@ -6,7 +6,7 @@
         <div class="card card-chart">
             <div class="card-header card-header-info">
                 <h3 class="card-title text-center"><i class="material-icons">terminal</i> Custom Commands</h3>
-                <p class="card-category">Send a custom command to the server. Enter with out the "/"</p>
+                <p class="card-category">Send a custom command to the server. Enter without the "/"</p>
             </div>
             <div class="card-body">
                 <div class="mb-3 mt-3">
@@ -35,7 +35,7 @@
                 <form id="WhitelistForm" action="/commands/whitelistform" method="POST" >
                     <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                     <div class="mb-3 mt-3">
-                      <label for="whitelist" class="form-label">Enter username to Whitelist:</label>
+                      <label for="whitelist" class="form-label">Enter username to Whitelist:</label>`~
                       <input name="whitelist" id="whitelist" type="text" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-success" onclick="SendCustomCommand('WhitelistForm')">Submit</button>
@@ -71,7 +71,7 @@
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <p class="card-category">Sends the Stop command to the server turning it off and prompts a startup</p>
+                    <p class="card-category">Sends the Stop command to the server turning it off and prompts a startup.</p>
                 </div>
             </div>
         </div>
