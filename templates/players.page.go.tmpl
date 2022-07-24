@@ -1,11 +1,11 @@
 {{template "base" .}}
 {{define "content"}}
 <h1>Players</h1>
-<div class="row">
+<div class="row mt-3">
     {{$players := index .DataMap "players"}}
     {{$rconStatus := index .DataMap "rconStatus"}}
     <div class="col-md-12">
-        <div class="card  card-chart">
+        <div class="card text-bg-dark card-chart">
             {{if $players}}<div class="card-header card-header-success">
             {{else}}<div class="card-header card-header-warning">{{end}}
                 <h3 class="card-title text-center"><i class="material-icons">list_alt</i> Online Players</h3>

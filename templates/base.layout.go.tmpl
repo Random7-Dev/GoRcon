@@ -127,6 +127,10 @@
                 crossorigin="anonymous"></script>
                 <script src="https://unpkg.com/notie"></script>
             {{block "js" .}}{{end}}
+            {{with .Error}}<script>notie.alert({ type: 3, text: '{{.}}', position: 'bottom', stay: true})</script>{{end}}
+            {{with .Warning}}<script>notie.alert({ type: 2, text: '{{.}}', position: 'bottom', stay: true})</script>{{end}}
+            {{with .Flash}}<script>notie.alert({ type: 1, text: '{{.}}', position: 'bottom', stay: true})</script>{{end}}
+            
 </body>
 
 </html>
