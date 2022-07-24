@@ -1,123 +1,132 @@
 {{define "base"}}
 <!doctype html>
 <html lang="en">
+
 <head>
-    <title>GoRcon - {{index .ActivePage}}</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <!-- Material Kit CSS -->
-    <link href="/static/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-    {{block "css" .}}
-    {{end}}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GoRcon - {{index .ActivePage}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <meta name="theme-color" content="#712cf9">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    <!--CustomCSS-->
+    <link href="/static/css/base_layout.css" rel="stylesheet">
+    {{block "css" .}}{{end}}
 </head>
 
-<body class="dark-edition">
-    <div class="wrapper ">
-        <div class="sidebar" data-color="azure" data-background-color="black" data-image="/static/assets/img/pexels-aleksandar-pasaric-2603464.jpg">
-            <div class="text-center logo">
-                <a href="\" class="text-center logo-normal">
-                    <i class="material-icons">bolt</i>
-                    GoRcon
-                    <i class="material-icons">bolt</i>
-                </a>
-            </div>
-            <div class="sidebar-wrapper">
-                <ul class="nav">
-                    <li class="nav-item {{if eq (index .ActivePage) "Dashboard"}}active{{else}}{{end}}">
-                        <a class="nav-link" href="/dashboard">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
+<body class="bg-dark bg-opacity-75">
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">GoRcon</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3 sidebar-sticky">
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>Site</span>
+                        <a class="link-secondary" href="#">
+                            <span data-feather="plus-circle" class="align-text-bottom"></span>
                         </a>
-                    </li>
-                    <li class="nav-item {{if eq (index .ActivePage) "Commands"}}active{{else}}{{end}}">
-                        <a class="nav-link" href="/commands">
-                            <i class="material-icons">content_paste</i>
-                            <p>Commands</p>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{if eq (index .ActivePage) "Home"}}active{{else}}text-light{{end}}"
+                                aria-current="page" href="/">
+                                <span data-feather="home" class="align-text-bottom"></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{if eq (index .ActivePage) "About"}}active{{else}}text-light{{end}}" href="/about">
+                                <span data-feather="file" class="align-text-bottom"></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{if eq (index .ActivePage) "Login"}}active{{else}}text-light{{end}}"
+                                href="/login">
+                                <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                                Login
+                            </a>
+                        </li>
+                    </ul>
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>RCON</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle" class="align-text-bottom"></span>
                         </a>
-                    </li>
-                    <li class="nav-item {{if eq (index .ActivePage) "Players"}}active{{else}}{{end}}">
-                        <a class="nav-link" href="/players">
-                            <i class="material-icons">person</i>
-                            <p>Players</p>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link {{if eq (index .ActivePage) "Dashboard"}}active{{else}}text-light{{end}}"
+                                href="/dashboard">
+                                <span data-feather="file-text" class="align-text-bottom"></span>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{if eq (index .ActivePage) "Commands"}}active{{else}}text-light{{end}}"
+                                href="/commands">
+                                <span data-feather="file-text" class="align-text-bottom"></span>
+                                Commands
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{if eq (index .ActivePage) "Players"}}active{{else}}text-light{{end}}"
+                                href="/players">
+                                <span data-feather="file-text" class="align-text-bottom"></span>
+                                Players
+                            </a>
+                        </li>
+                    </ul>
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>Account</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle" class="align-text-bottom"></span>
                         </a>
-                    </li>
-                    <li class="nav-item {{if eq (index .ActivePage) "Admin"}}active{{else}}{{end}}">
-                        <a class="nav-link" href="/admin">
-                            <i class="material-icons">library_books</i>
-                            <p>Admin</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{if eq (index .ActivePage) "Login"}}active{{else}}{{end}}">
-                        <a class="nav-link" href="/login">
-                            <i class="material-icons">login</i>
-                            <p>Login</p>
-                        </a>
-                    </li>
-                    <li class="nav-item {{if eq (index .ActivePage) "About"}}active{{else}}{{end}}">
-                        <a class="nav-link" href="/about">
-                            <i class="material-icons">info</i>
-                            <p>About</p>
-                        </a>
-                    </li>
-                    <!-- your sidebar here -->
-                </ul>
-            </div>
-        </div>
-        <div class="main-panel ps-container ps-theme-azure">
-            <div class="content">
-                <div class="container-fluid">
-                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-                        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-                        crossorigin="anonymous"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
-                        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
-                        crossorigin="anonymous"></script>
-                    {{block "content" .}}
-                    {{end}}
+                    </h6> 
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link {{if eq (index .ActivePage) "Admin"}}active{{else}}text-light{{end}}"
+                                href="/admin">
+                                <span data-feather="file-text" class="align-text-bottom"></span>
+                                Admin
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="float-left">
-                        <ul>
-                            <li>
-                                <a href="/">
-                                    GoRcon
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="copyright float-right">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script> made by Jon Fingas - Available on <a href="https://github.com/Random-7/GoRcon"> Github</a>
-                    </div>
-                    <!-- your footer here -->
-                </div>
-            </footer>
-        </div>
-    </div>
-    {{block "js" .}}
+            </nav>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    {{block "content" .}}
     {{end}}
-    <!--   Core JS Files   -->
-    <script src="/static/assets/js/core/jquery.min.js"></script>
-    <script src="/static/assets/js/core/popper.min.js"></script>
-    <script src="/static/assets/js/core/bootstrap-material-design.min.js"></script>
-    <script src="https://unpkg.com/default-passive-events"></script>
-    <script src="/static/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Chartist JS -->
-    <script src="/static/assets/js/plugins/chartist.min.js"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="/static/assets/js/material-dashboard.js?v=2.1.0"></script>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/notie"></script>
+    {{block "js" .}}{{end}}
+    {{with .Error}}<script>notie.alert({ type: 3, text: '{{.}}', position: 'bottom', stay: true})</script>{{end}}
+    {{with .Warning}}<script>notie.alert({ type: 2, text: '{{.}}', position: 'bottom', stay: true})</script>{{end}}
+    {{with .Flash}}<script>notie.alert({ type: 1, text: '{{.}}', position: 'bottom', stay: true})</script>{{end}}
+           
 </body>
+
 </html>
 {{end}}

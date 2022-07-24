@@ -73,8 +73,8 @@ func (m *Repository) PostCustom(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(resp)
-	http.Redirect(w, r, "/commands", http.StatusSeeOther)
 	m.App.Session.Put(r.Context(), "flash", resp)
+	http.Redirect(w, r, "/commands", http.StatusSeeOther)
 }
 
 //PostSendCustomCommand retreives the custom command from the form.
@@ -103,7 +103,6 @@ func (m *Repository) PostRestart(w http.ResponseWriter, r *http.Request) {
 	}
 
 	m.App.Rcon.DisconnectRcon()
-	fmt.Println(resp)
-	m.App.Session.Put(r.Context(), "flash", resp)
+	m.App.Session.Put(r.Context(), "error", resp)
 	http.Redirect(w, r, "/commands", http.StatusSeeOther)
 }

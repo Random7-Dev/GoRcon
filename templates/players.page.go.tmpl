@@ -1,77 +1,68 @@
 {{template "base" .}}
 {{define "content"}}
-<div class="row">
     <h1>Players</h1>
-    {{$players := index .DataMap "players"}}
-    {{$rconStatus := index .DataMap "rconStatus"}}
-    <div class="col-md-12">
-        <div class="card  card-chart">
-            {{if $players}}<div class="card-header card-header-success">
-            {{else}}<div class="card-header card-header-warning">{{end}}
-                <h3 class="card-title text-center"><i class="material-icons">list_alt</i> Online Players</h3>
-                {{if $players}}<p class="card-category"> Currently online players.</p>
-                {{else}}<p class="card-category"> Currently no players online.</p>{{end}}
-            </div>
-            <div class="card-body">
-                {{if not $players}}
-                {{else}}
-                <div class="table-responsive">
-                    <table class="table table-striped table-dark">
-                        <thead>
-                            <th class="text-info text-center">
-                                Name
-                            </th>
-                            <th class="text-info text-center">
-                                Move Player to Spawn
-                            </th>
-                            <th class="text-info text-center">
-                                Move Player to Home
-                            </th>
-                            <th class="text-info text-center">
-                                Kick Player from Server
-                            </th>
-                        </thead>
-                        <tbody>
-                            {{$token := .CSRFToken}}
-                            {{range $players}}
-                            <tr>
-                                <td>
-                                    <div class="col text-center text-success">
-                                        {{.}}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="col text-center">
-                                        <button id="TPSpawn-{{.}}" type="submit" class="btn btn-info" onclick="SendCommand(id,{{$token}})">TP to Spawn</button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="col text-center">
-                                        <button id="TPHome-{{.}}" type="submit" class="btn btn-primary" onclick="SendCommand(id,{{$token}})">TP to players home</button>
-                                    </div>
-                                </td>
-                                <td class="text-danger">
-                                    <div class="col text-center">
-                                        <button id="Kick-{{.}}" type="submit" class="btn btn-danger" onclick="SendCommand(id,{{$token}})">Kick</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            {{end}}
-                        </tbody>
-                    </table>
-                    {{end}}
+    <div class="row mt-3">
+        {{$players := index .DataMap "players"}}
+        {{$rconStatus := index .DataMap "rconStatus"}}
+        <div class="col-md-12">
+            <div class="card text-bg-dark card-chart">
+                {{if $players}}<div class="card-header card-header-success">
+                {{else}}<div class="card-header card-header-warning">{{end}}
+                    <h3 class="card-title text-center"><i class="material-icons">list_alt</i> Online Players</h3>
+                    {{if $players}}<p class="card-category"> Currently online players.</p>
+                    {{else}}<p class="card-category"> Currently no players online.</p>{{end}}
                 </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <p class="card-category">
-                            <p class="card-category">Current Rcon status {{if eq ($rconStatus) true}}<span class="text-success">Connected</span>{{else}}<span class="text-danger"></span>Disconnected</span>{{end}}</p>
-                        </p>
+                <div class="card-body">
+                    {{if not $players}}
+                    {{else}}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-dark">
+                            <tbody>
+                                <tr class="text text-center">
+                                    <th>Name</th>
+                                    <th>Move Player to Spawn</th>
+                                    <th>Move Player to Home</th>
+                                    <th>Kick Player from Server</th>
+                                </tr>
+                                {{$token := .CSRFToken}}
+                                {{range $players}}
+                                <tr>
+                                    <td>
+                                        <div class="col text-center text">
+                                            {{.}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col text-center">
+                                            <button id="TPSpawn-{{.}}" type="submit" class="btn btn-outline-info" onclick="SendCommand(id,{{$token}})">TP Player To Spawn</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col text-center">
+                                            <button id="TPHome-{{.}}" type="submit" class="btn btn-outline-primary" onclick="SendCommand(id,{{$token}})">TP Player To Home</button>
+                                        </div>
+                                    </td>
+                                    <td class="text-danger">
+                                        <div class="col text-center">
+                                            <button id="Kick-{{.}}" type="submit" class="btn btn-outline-danger" onclick="SendCommand(id,{{$token}})">Kick Player</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+                        {{end}}
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <p class="card-category">
+                                <p class="card-category">Current Rcon status {{if eq ($rconStatus) true}}<span class="text-success">Connected</span>{{else}}<span class="text-danger"></span>Disconnected</span>{{end}}</p>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>  
 {{end}}
 {{define "js"}}
    <script src="/static/js/PlayerPageActions.js"></script>
