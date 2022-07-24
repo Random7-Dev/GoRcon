@@ -9,13 +9,18 @@
                 <p class="card-category">Send a custom command to the server. Enter without the "/"</p>
             </div>
             <div class="card-body">
-                <div class="mb-3 mt-3">
-                <form  id="CustomForm" action="/commands/customform" method="post">
-                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
-                    <label for="customCommand" class="form-label">Enter Custom Command:</label>
-                    <input name="customCommand" id="customCommand" type="text" class="form-control">
-                    <button type="submit" class="btn btn-info" onclick="SendCustomCommand('CustomForm')">Submit</button>
-                  </form>
+                <div class="mb-3">
+                    <form id="CustomForm" action="/commands/customform" method="post">
+                        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                        <label for="customCommand" class="form-label">Enter Custom Command:</label>
+                        <div class="input-group">
+                            <span class="input-group-text">/</span>
+                            <input name="customCommand" id="customCommand" type="text" class="form-control">
+                        </div>
+                        <div class="input-group mt-3">
+                            <button type="submit" class="btn btn-outline-info" onclick="SendCustomCommand('CustomForm')">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="card-footer">
@@ -32,22 +37,30 @@
                 <p class="card-category">Enter a username or UUID to Whitelist</p>
             </div>
             <div class="card-body">
-                <form id="WhitelistForm" action="/commands/whitelistform" method="POST" >
-                    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
-                    <div class="mb-3 mt-3">
-                      <label for="whitelist" class="form-label">Enter username to Whitelist:</label>`~
-                      <input name="whitelist" id="whitelist" type="text" class="form-control">
+                <div class="mb-3">
+                    <form id="CustomForm" action="/commands/customform" method="post">
+                        <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+                        <label for="customCommand" class="form-label">Enter a Username or UUID:</label>
+                        <div class="input-group">
+                            <span class="input-group-text">/whitelist add </span>
+                            <input name="customCommand" id="customCommand" type="text" class="form-control">
+                        </div>
+                        <div class="input-group mt-3">
+                            <button type="submit" class="btn btn-outline-success"
+                                onclick="SendCustomCommand('WhitelistForm')">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <p class="card-category">Add users to the servers Whitelist.</p>
                     </div>
-                    <button type="submit" class="btn btn-success" onclick="SendCustomCommand('WhitelistForm')">Submit</button>
-                  </form>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <p class="card-category">Add users to the servers Whitelist.</p>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    <div class="row mt-3">
     <div class="col-xl-4 col-lg-12">
         <div class="card text-bg-dark card-chart">
             <div class="card-header card-header-danger">
@@ -75,6 +88,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 {{end}}
