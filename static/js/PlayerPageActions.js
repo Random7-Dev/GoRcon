@@ -1,7 +1,6 @@
 let message;
 let command;
-const UserModal = document.getElementById('UserModal')
-
+ 
 function SendCommand(ActionPlayer, token) {
     let splitString = ActionPlayer.split("-");
     

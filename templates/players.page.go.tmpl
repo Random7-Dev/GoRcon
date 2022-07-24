@@ -17,21 +17,13 @@
                     {{else}}
                     <div class="table-responsive">
                         <table class="table table-striped table-dark">
-                            <thead>
-                                <th class="text text-center">
-                                    Name
-                                </th>
-                                <th class="text text-center">
-                                    Move Player to Spawn
-                                </th>
-                                <th class="text text-center">
-                                    Move Player to Home
-                                </th>
-                                <th class="text text-center">
-                                    Kick Player from Server
-                                </th>
-                            </thead>
                             <tbody>
+                                <tr class="text text-center">
+                                    <th>Name</th>
+                                    <th>Move Player to Spawn</th>
+                                    <th>Move Player to Home</th>
+                                    <th>Kick Player from Server</th>
+                                </tr>
                                 {{$token := .CSRFToken}}
                                 {{range $players}}
                                 <tr>
@@ -42,17 +34,17 @@
                                     </td>
                                     <td>
                                         <div class="col text-center">
-                                            <button id="TPSpawn-{{.}}" type="submit" class="btn btn-outline-info" onclick="SendCommand(id,{{$token}})">TP to Spawn</button>
+                                            <button id="TPSpawn-{{.}}" type="submit" class="btn btn-outline-info" onclick="SendCommand(id,{{$token}})">TP Player To Spawn</button>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="col text-center">
-                                            <button id="TPHome-{{.}}" type="submit" class="btn btn-outline-primary" onclick="SendCommand(id,{{$token}})">TP to players home</button>
+                                            <button id="TPHome-{{.}}" type="submit" class="btn btn-outline-primary" onclick="SendCommand(id,{{$token}})">TP Player To Home</button>
                                         </div>
                                     </td>
                                     <td class="text-danger">
                                         <div class="col text-center">
-                                            <button id="Kick-{{.}}" type="submit" class="btn btn-outline-danger" onclick="SendCommand(id,{{$token}})">Kick</button>
+                                            <button id="Kick-{{.}}" type="submit" class="btn btn-outline-danger" onclick="SendCommand(id,{{$token}})">Kick Player</button>
                                         </div>
                                     </td>
                                 </tr>
