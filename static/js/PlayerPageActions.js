@@ -1,3 +1,7 @@
+let message;
+let command;
+const UserModal = document.getElementById('UserModal')
+
 function SendCommand(ActionPlayer, token) {
     let splitString = ActionPlayer.split("-");
     
@@ -21,6 +25,15 @@ function SendCommand(ActionPlayer, token) {
     .then(Response => Response.json())
     .then(json => {
         console.log(json.message)
+        message = json.message
         console.log(json.command)
-    });
+        command = json.command
+    })
+}
+
+function GetMessage() {
+    return message;
+}
+function GetCommand() {
+    return command;
 }
