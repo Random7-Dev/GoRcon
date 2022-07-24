@@ -77,11 +77,6 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="/login">Sign In</a>
-            </div>
-        </div>
     </header>
     <div class="container-fluid">
         <div class="row">
@@ -141,6 +136,21 @@
                             </a>
                         </li>
                     </ul>
+                    <h6
+                    class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                    <span>Account</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle" class="align-text-bottom"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link {{if eq (index .ActivePage) "Login"}}active{{else}}text-light{{end}}" href="/login">
+                            <span data-feather="file-text" class="align-text-bottom"></span>
+                            Sign-In
+                        </a>
+                    </li>
+                </ul>
                 </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

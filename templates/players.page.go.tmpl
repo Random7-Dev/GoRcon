@@ -1,7 +1,7 @@
 {{template "base" .}}
 {{define "content"}}
+<h1>Players</h1>
 <div class="row">
-    <h1>Players</h1>
     {{$players := index .DataMap "players"}}
     {{$rconStatus := index .DataMap "rconStatus"}}
     <div class="col-md-12">
