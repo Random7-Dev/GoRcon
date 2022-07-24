@@ -81,7 +81,6 @@ func (r *Connection) SendCommand(cmd string) (string, error) {
 		fmt.Println("Error with send command: ", err)
 		return "error", err
 	}
-	fmt.Println(response)
 	return response, nil
 }
 

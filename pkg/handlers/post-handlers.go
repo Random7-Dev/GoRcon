@@ -22,7 +22,7 @@ type Response struct {
 
 //PostSendCommand retrieves the command and effected player and send the proper request to the Rcon based on the values
 func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
-	
+
 	data := new(PlayerCommands)
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&data)
@@ -65,14 +65,16 @@ func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
 //PostSendCustomCommand retreives the custom command from the form.
 func (m *Repository) PostCustom(w http.ResponseWriter, r *http.Request) {
 	command := r.FormValue("customCommand")
-	fmt.Println(command)
+
 	resp, err := m.App.Rcon.SendCommand(command)
+
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	fmt.Println(resp)
 	http.Redirect(w, r, "/commands", http.StatusSeeOther)
+	m.App.Session.Put(r.Context(), "flash", resp)
 }
 
 //PostSendCustomCommand retreives the custom command from the form.
@@ -85,6 +87,7 @@ func (m *Repository) PostWhitelist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(resp)
+	m.App.Session.Put(r.Context(), "flash", resp)
 	http.Redirect(w, r, "/commands", http.StatusSeeOther)
 }
 
@@ -101,5 +104,6 @@ func (m *Repository) PostRestart(w http.ResponseWriter, r *http.Request) {
 
 	m.App.Rcon.DisconnectRcon()
 	fmt.Println(resp)
+	m.App.Session.Put(r.Context(), "flash", resp)
 	http.Redirect(w, r, "/commands", http.StatusSeeOther)
 }

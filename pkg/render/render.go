@@ -22,9 +22,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefualtData(templateDate *models.TemplateData, r *http.Request) *models.TemplateData {
-	templateDate.CSRFToken = nosurf.Token(r)
-	return templateDate
+func AddDefualtData(templateData *models.TemplateData, r *http.Request) *models.TemplateData {
+	templateData.CSRFToken = nosurf.Token(r)
+	templateData.Error = app.Session.PopString(r.Context(), "error")
+	templateData.Warning = app.Session.PopString(r.Context(), "warning")
+	templateData.Flash = app.Session.PopString(r.Context(), "flash")
+	return templateData
 }
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, templateData *models.TemplateData) {
