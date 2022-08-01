@@ -16,3 +16,12 @@ type CommandLog struct {
 	Command string
 	Result  string
 }
+
+//Users is for website users
+type Users struct {
+	gorm.Model
+	ID       uint `gorm:"primaryKey"`
+	Username string
+	Password string
+	Email    string
+}

@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/Random-7/GoRcon/pkg/config"
+	"github.com/Random-7/GoRcon/pkg/database"
 	"github.com/Random-7/GoRcon/pkg/handlers"
 	"github.com/Random-7/GoRcon/pkg/rcon"
 	"github.com/Random-7/GoRcon/pkg/render"
@@ -21,11 +22,13 @@ const portNumber = ":8080"
 var app config.AppConfig
 
 type configFile struct {
-	RconIP   string `json:"rconIP"`
-	RconPass string `json:"rconPass"`
-	DbIP     string `json:"dbIP"`
-	DbPass   string `json:"dbPass"`
-	Cache    bool   `json:"cache"`
+	RconIP     string `json:"rconIP"`
+	RconPass   string `json:"rconPass"`
+	DbIP       string `json:"dbIP"`
+	DbUser     string `json:"dbUser"`
+	DbPass     string `json:"dbPass"`
+	DbDatabase string `json:"dbDatabase"`
+	Cache      bool   `json:"cache"`
 }
 
 func main() {
@@ -61,6 +64,10 @@ func main() {
 	render.NewTemplates(&app)
 
 	go setupRconConnection(fileConfig.RconIP, fileConfig.RconPass)
+
+	db := database.Session{}
+	app.Db = db
+	go app.Db.SetupInitial(fileConfig.DbIP, fileConfig.DbUser, fileConfig.DbPass, fileConfig.DbDatabase)
 
 	fmt.Println("Starting Webserver on", portNumber)
 	srv := &http.Server{

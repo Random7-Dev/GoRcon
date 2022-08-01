@@ -1,0 +1,9 @@
+{
+    "rconIp": "127.0.0.1",
+    "rconPass": "supersecret",
+    "dbIP": "127.0.0.1",
+    "dbUser": "user",
+    "dbPass": "pass",
+    "dbDatabase": "database",
+    "cache": false
+}
