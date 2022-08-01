@@ -19,16 +19,17 @@ import (
 
 const portNumber = ":8080"
 
+//Application state
 var app config.AppConfig
 
 type configFile struct {
-	RconIP     string `json:"rconIP"`
-	RconPass   string `json:"rconPass"`
-	DbIP       string `json:"dbIP"`
-	DbUser     string `json:"dbUser"`
-	DbPass     string `json:"dbPass"`
-	DbDatabase string `json:"dbDatabase"`
-	Cache      bool   `json:"cache"`
+	RconIP   string `json:"rconIP"`
+	RconPass string `json:"rconPass"`
+	DbIP     string `json:"dbIP"`
+	DbUser   string `json:"dbUser"`
+	DbPass   string `json:"dbPass"`
+	DbName   string `json:"dbName"`
+	Cache    bool   `json:"cache"`
 }
 
 func main() {
@@ -64,10 +65,7 @@ func main() {
 	render.NewTemplates(&app)
 
 	go setupRconConnection(fileConfig.RconIP, fileConfig.RconPass)
-
-	db := database.Session{}
-	app.Db = db
-	go app.Db.SetupInitial(fileConfig.DbIP, fileConfig.DbUser, fileConfig.DbPass, fileConfig.DbDatabase)
+	go setupDatabaseConnection(fileConfig.DbIP, fileConfig.DbUser, fileConfig.DbPass, fileConfig.DbName)
 
 	fmt.Println("Starting Webserver on", portNumber)
 	srv := &http.Server{
@@ -77,6 +75,19 @@ func main() {
 	_ = srv.ListenAndServe()
 }
 
+//TODO add checks in this to make sure we have valid info.
+//setupDatabaseConnection populates the dbSession struct with info needed to connect to the database and calls the initial connection
+func setupDatabaseConnection(ip, user, password, dbname string) {
+	dbSession := new(database.Session)
+	dbSession.IP = ip
+	dbSession.User = user
+	dbSession.Password = password
+	dbSession.DbName = dbname
+	app.DbSession = *dbSession
+	app.DbSession.SetupInitial()
+}
+
+//setupRconConnection buils the rcon connection and saves it in the app config
 func setupRconConnection(ip string, password string) {
 	//Setup rcon conneciton
 	rcon := new(rcon.Connection)
@@ -92,6 +103,7 @@ func setupRconConnection(ip string, password string) {
 
 }
 
+//parseConfig reads the json config file and pulls out values so the program can use it
 func parseConfig() (configFile, error) {
 	var config configFile
 	jsonFile, err := os.Open("config.json")

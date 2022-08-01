@@ -17,6 +17,6 @@ type AppConfig struct {
 	InProduction  bool
 	Session       *scs.SessionManager
 	Rcon          rcon.Connection
-	Db            database.Session
+	DbSession     database.Session
 	Version       string
 }

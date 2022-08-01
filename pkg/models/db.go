@@ -12,6 +12,7 @@ type OnlinePlayers struct {
 //CommandLog is for logging every command sent from the webapp
 type CommandLog struct {
 	gorm.Model
+	ID      uint `gorm:"primaryKey"`
 	User    string
 	Command string
 	Result  string
