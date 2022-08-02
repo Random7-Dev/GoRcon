@@ -6,7 +6,7 @@ import "gorm.io/gorm"
 type OnlinePlayers struct {
 	gorm.Model
 	CurrentCount int
-	Players      []string
+	Players      string
 }
 
 //CommandLog is for logging every command sent from the webapp
@@ -18,8 +18,8 @@ type CommandLog struct {
 	Result  string
 }
 
-//Users is for website users
-type Users struct {
+//User is for website users
+type User struct {
 	gorm.Model
 	ID       uint `gorm:"primaryKey"`
 	Username string

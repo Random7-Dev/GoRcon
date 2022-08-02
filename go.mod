@@ -8,12 +8,12 @@ require (
 	github.com/justinas/nosurf v1.1.1
 )
 
-require github.com/Kelwing/mc-rcon v0.0.0-20220214194105-bec8dcbccc3f
-
 require (
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
-	gorm.io/driver/mysql v1.3.5 // indirect
+	github.com/Kelwing/mc-rcon v0.0.0-20220214194105-bec8dcbccc3f
+	gorm.io/driver/mysql v1.3.5
 )
+
+require github.com/go-sql-driver/mysql v1.6.0 // indirect
 
 require (
 	github.com/jinzhu/inflection v1.0.0 // indirect

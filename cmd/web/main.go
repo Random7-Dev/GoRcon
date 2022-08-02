@@ -84,7 +84,9 @@ func setupDatabaseConnection(ip, user, password, dbname string) {
 	dbSession.Password = password
 	dbSession.DbName = dbname
 	app.DbSession = *dbSession
-	app.DbSession.SetupInitial()
+
+	app.DbSession.Setup()
+
 }
 
 //setupRconConnection buils the rcon connection and saves it in the app config
