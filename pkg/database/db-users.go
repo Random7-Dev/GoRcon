@@ -1,8 +1,6 @@
 package database
 
 import (
-	"fmt"
-
 	"github.com/Random-7/GoRcon/pkg/models"
 )
 
@@ -11,10 +9,8 @@ func (d *Session) GetUser(username string) (models.User, error) {
 	var user models.User
 	result := d.Db.Where("username = ?", username).First(&user)
 	if result.Error != nil {
-		fmt.Println("User not found")
 		return user, result.Error
 	}
-	fmt.Println(user)
 	return user, nil
 }
 

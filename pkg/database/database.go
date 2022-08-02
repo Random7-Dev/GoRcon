@@ -26,11 +26,30 @@ func (d *Session) Setup() {
 		fmt.Println("Error with database:", err)
 	}
 
-	d.Migrate()
+	d.migrate()
+	d.createAdmin()
+
+}
+
+//createAdmin Creates the primary admin account if not already made.
+func (d *Session) createAdmin() {
+	_, err := d.GetUser("admin")
+	if err != nil {
+		_, err := d.CreateUser(models.User{
+			Username: "admin",
+			Password: "password",
+			Email:    "admin@email.com"})
+		if err != nil {
+			fmt.Println("Create Admin error:", err)
+		}
+		fmt.Println("Admin account created")
+		return
+	}
+	fmt.Println("Admin account already exists")
 }
 
 //Migrate uses gorms automigrate to check/create the need tables based on models
-func (d *Session) Migrate() {
+func (d *Session) migrate() {
 	//automigrate databases
 	d.Db.AutoMigrate(&models.User{})
 	d.Db.AutoMigrate(&models.CommandLog{})
