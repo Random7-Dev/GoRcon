@@ -38,7 +38,6 @@ func main() {
 	if err != nil {
 		log.Fatal("cannot read config")
 	}
-	fmt.Println(fileConfig)
 
 	//InProduction
 	app.InProduction = false
@@ -113,7 +112,6 @@ func parseConfig() (configFile, error) {
 		log.Fatal("cannot open config.json")
 		return configFile{}, err
 	}
-	fmt.Println("Opened JSON File")
 	defer jsonFile.Close()
 
 	bytevalue, _ := ioutil.ReadAll(jsonFile)

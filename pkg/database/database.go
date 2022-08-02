@@ -28,9 +28,9 @@ func (d *Session) Setup() {
 
 	d.migrate()
 	d.createAdmin()
-
 }
 
+//TODO specify a admin account in config.json
 //createAdmin Creates the primary admin account if not already made.
 func (d *Session) createAdmin() {
 	_, err := d.GetUser("admin")
@@ -45,7 +45,6 @@ func (d *Session) createAdmin() {
 		fmt.Println("Admin account created")
 		return
 	}
-	fmt.Println("Admin account already exists")
 }
 
 //Migrate uses gorms automigrate to check/create the need tables based on models
