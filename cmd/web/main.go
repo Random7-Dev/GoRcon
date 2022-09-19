@@ -19,7 +19,7 @@ import (
 
 const portNumber = ":8080"
 
-//Application state
+// Application state
 var app config.AppConfig
 
 type configFile struct {
@@ -74,8 +74,8 @@ func main() {
 	_ = srv.ListenAndServe()
 }
 
-//TODO add checks in this to make sure we have valid info.
-//setupDatabaseConnection populates the dbSession struct with info needed to connect to the database and calls the initial connection
+// TODO add checks in this to make sure we have valid info.
+// setupDatabaseConnection populates the dbSession struct with info needed to connect to the database and calls the initial connection
 func setupDatabaseConnection(ip, user, password, dbname string) {
 	dbSession := new(database.Session)
 	dbSession.IP = ip
@@ -84,11 +84,13 @@ func setupDatabaseConnection(ip, user, password, dbname string) {
 	dbSession.DbName = dbname
 	app.DbSession = *dbSession
 
+	fmt.Println(dbSession)
+
 	app.DbSession.Setup()
 
 }
 
-//setupRconConnection buils the rcon connection and saves it in the app config
+// setupRconConnection buils the rcon connection and saves it in the app config
 func setupRconConnection(ip string, password string) {
 	//Setup rcon conneciton
 	rcon := new(rcon.Connection)
@@ -104,7 +106,7 @@ func setupRconConnection(ip string, password string) {
 
 }
 
-//parseConfig reads the json config file and pulls out values so the program can use it
+// parseConfig reads the json config file and pulls out values so the program can use it
 func parseConfig() (configFile, error) {
 	var config configFile
 	jsonFile, err := os.Open("config.json")

@@ -16,7 +16,7 @@ type Session struct {
 	DbName   string
 }
 
-//SetupInitial forms the initial dsn from the populated values in session struct and connects to the db
+// SetupInitial forms the initial dsn from the populated values in session struct and connects to the db
 func (d *Session) Setup() {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local", d.User, d.Password, d.IP, d.DbName)
 	var err error
@@ -30,8 +30,8 @@ func (d *Session) Setup() {
 	d.createAdmin()
 }
 
-//TODO specify a admin account in config.json
-//createAdmin Creates the primary admin account if not already made.
+// TODO specify a admin account in config.json
+// createAdmin Creates the primary admin account if not already made.
 func (d *Session) createAdmin() {
 	_, err := d.GetUser("admin")
 	if err != nil {
@@ -47,7 +47,7 @@ func (d *Session) createAdmin() {
 	}
 }
 
-//Migrate uses gorms automigrate to check/create the need tables based on models
+// Migrate uses gorms automigrate to check/create the need tables based on models
 func (d *Session) migrate() {
 	//automigrate databases
 	d.Db.AutoMigrate(&models.User{})
