@@ -84,7 +84,10 @@ func setupDatabaseConnection(ip, user, password, dbname string) {
 	dbSession.DbName = dbname
 	app.DbSession = *dbSession
 
-	fmt.Println(dbSession)
+	fmt.Println(dbSession.DbName)
+	fmt.Println(dbSession.Password)
+	fmt.Println(dbSession.User)
+	fmt.Println(dbSession.IP)
 
 	app.DbSession.Setup()
 
