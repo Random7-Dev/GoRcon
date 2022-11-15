@@ -24,7 +24,7 @@ func main() {
 	App.DbSettings.Password = "KaXSIDS2sG48oxsQodjn"
 	App.DbSettings.DbName = "railway"
 
-	rcon.SetupConnection(&App)
-	model.SetupDB(&App)
+	go rcon.SetupConnection(&App)
+	go model.SetupDB(&App)
 	server.Serve(&App)
 }
