@@ -18,4 +18,5 @@ func SetupDB(App *config.App) {
 	App.Db.AutoMigrate(&Users{})
 	App.Db.AutoMigrate(&Players{})
 	App.Db.AutoMigrate(&CommandLog{})
+
 }
