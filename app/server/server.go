@@ -12,6 +12,27 @@ type ServerInfo struct {
 	Port string
 }
 
+// Repo the repository used by the handlers
+var Repo *Repository
+
+// Repository is the repository type
+type Repository struct {
+	App *config.App
+	//DB  repository.DatabaseRepo
+}
+
+// NewRepo Creates a new repository with the current app config attached
+func NewRepo(a *config.App) *Repository {
+	return &Repository{
+		App: a,
+	}
+}
+
+// NewHandlers sets the repository for the handlers
+func NewHandlers(r *Repository) {
+	Repo = r
+}
+
 func Serve(App *config.App) {
 
 	App.WebServer = fiber.New()
