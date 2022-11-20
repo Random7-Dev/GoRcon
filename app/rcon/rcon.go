@@ -89,8 +89,35 @@ func GetPlayers() (model.PlayerMessage, error) {
 
 	//Populate the playersJson with each players name
 	for _, s := range players {
-		playersJson.Players = append(playersJson.Players, s)
+		playersJson.Players = append(playersJson.Players, model.Players{Name: s})
 	}
 
+	model.AddToCommandLog(model.CommandLog{
+		Command:  "list",
+		Response: cmdresp,
+		SentBy:   "Api",
+	})
+
 	return playersJson, nil
+}
+
+// KickPlayer send them kick command over the rcon session, the target is the players name who you wish to kick
+// function returns a model.kickcommand and error. if there is an error it is inputted into model.kickcommand.Error
+func KickPlayer(target string) (model.KickCommand, error) {
+	var kickCommand model.KickCommand
+	var err error
+
+	cmd := fmt.Sprintf("kick " + target)
+	kickCommand.Response, err = RconSession.Rcon.SendCommand(cmd)
+	if err != nil {
+		kickCommand.Error = err.Error()
+	}
+
+	model.AddToCommandLog(model.CommandLog{
+		Command:  "kick",
+		Response: kickCommand.Response,
+		SentBy:   "Api",
+	})
+
+	return kickCommand, nil
 }

@@ -24,13 +24,13 @@ func main() {
 	App.DbSettings.Password = "KaXSIDS2sG48oxsQodjn"
 	App.DbSettings.DbName = "railway"
 
-	repo := server.NewRepo(&App)
-	server.NewHandlers(repo)
+	model.SetupDB(&App)
+	dbsession := model.SetupDbSession(&App)
+	model.NewDbSession(dbsession)
 
 	rcon.SetupConnection(&App)
 	rconsession := rcon.SetupRconSession(&App)
 	rcon.NewRconSession(rconsession)
 
-	go model.SetupDB(&App)
 	server.Serve(&App)
 }

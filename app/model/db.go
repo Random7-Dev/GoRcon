@@ -1,10 +1,28 @@
 package model
 
 import (
+	"fmt"
+
 	"github.com/Random7-JF/go-rcon-svelte/app/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
+
+type Connection struct {
+	Db *gorm.DB
+}
+
+var dbSession *Connection
+
+func SetupDbSession(a *config.App) *Connection {
+	return &Connection{
+		Db: a.Db,
+	}
+}
+
+func NewDbSession(c *Connection) {
+	dbSession = c
+}
 
 func SetupDB(App *config.App) {
 	var err error
@@ -16,7 +34,18 @@ func SetupDB(App *config.App) {
 
 	// Migrate the schema
 	App.Db.AutoMigrate(&Users{})
-	App.Db.AutoMigrate(&Players{})
 	App.Db.AutoMigrate(&CommandLog{})
 
+}
+
+func AddToCommandLog(log CommandLog) error {
+
+	result := dbSession.Db.Create(&log)
+
+	if result.Error != nil {
+		fmt.Println(result.Error.Error())
+		return result.Error
+	}
+
+	return nil
 }

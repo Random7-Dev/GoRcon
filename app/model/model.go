@@ -4,12 +4,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Players struct {
-	gorm.Model
-	Name string
-	UUID string
-}
-
 type Users struct {
 	gorm.Model
 	DisplayName string
@@ -19,6 +13,7 @@ type Users struct {
 }
 
 type CommandLog struct {
+	gorm.Model
 	Command  string
 	SentBy   string
 	Response string
