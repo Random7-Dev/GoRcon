@@ -1,8 +1,11 @@
 package model
 
-type ApiMessage struct {
+type Api struct {
 	Message string `json:"message"`
 	Version string `json:"version"`
+}
+type NoReplyCommand struct {
+	Error string `json:"Error"`
 }
 
 type KickCommand struct {
@@ -10,7 +13,7 @@ type KickCommand struct {
 	Error    string `json:"error"`
 }
 
-type PlayerMessage struct {
+type PlayersCommand struct {
 	CurrentCount int       `json:"currentcount"`
 	MaxCount     int       `json:"maxcount"`
 	Players      []Players `json:"players"`

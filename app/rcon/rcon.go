@@ -55,8 +55,8 @@ func SetupConnection(App *config.App) error {
 
 // GetPlayers sends a command over the rcon connection and takes the response, parse the string and return
 // the Current player count, Max player count and list of currently connected players in models.Players
-func GetPlayers() (model.PlayerMessage, error) {
-	var playersJson model.PlayerMessage
+func GetPlayers() (model.PlayersCommand, error) {
+	var playersJson model.PlayersCommand
 
 	//cmdresp is the full string we parse
 	//"There are 2/20 players online:Random777, Dude1872"
@@ -125,14 +125,14 @@ func KickPlayer(target string) (model.KickCommand, error) {
 
 // SendMessage send a message prefixed with "[Go-Rcon]" to the server for all players to see.
 // Using strings.replace to replace any %20 with a space that come from the Params.
-func SendMessage(message string) (model.ApiMessage, error) {
-	var response model.ApiMessage
+func SendMessage(message string) (model.NoReplyCommand, error) {
+	var response model.NoReplyCommand
 	var err error
 
 	msg := "say [Go-Rcon]: " + message
 	msg = strings.Replace(msg, "%20", " ", -1)
 
-	response.Message, err = RconSession.Rcon.SendCommand(msg)
+	response.Error, err = RconSession.Rcon.SendCommand(msg)
 	model.AddToCommandLog(model.CommandLog{
 		CommandType: "say",
 		Command:     msg,
@@ -140,7 +140,7 @@ func SendMessage(message string) (model.ApiMessage, error) {
 	})
 
 	if err != nil {
-		response.Message = err.Error()
+		response.Error = err.Error()
 		return response, err
 	}
 	return response, nil
@@ -148,11 +148,11 @@ func SendMessage(message string) (model.ApiMessage, error) {
 
 // StopServer send the "stop" command to the sever over the rcon connection
 // this will tell the server to shutdown and it will shutdown. A managed server should start backup after
-func StopServer(confirm bool) (model.ApiMessage, error) {
-	var response model.ApiMessage
+func StopServer(confirm bool) (model.NoReplyCommand, error) {
+	var response model.NoReplyCommand
 
 	if confirm {
-		response.Message, _ = RconSession.Rcon.SendCommand("stop")
+		response.Error, _ = RconSession.Rcon.SendCommand("stop")
 		model.AddToCommandLog(model.CommandLog{
 			CommandType: "stop",
 			Command:     "stop",

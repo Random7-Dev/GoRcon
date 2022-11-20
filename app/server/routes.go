@@ -20,14 +20,14 @@ func SetupRoutes(App *config.App) {
 }
 
 func HomeHandler(c *fiber.Ctx) error {
-	var msg model.ApiMessage
+	var msg model.Api
 	msg.Message = "Hello World!"
 	msg.Version = "0.1"
 	return c.JSON(msg)
 }
 
 func PlayersHandler(c *fiber.Ctx) error {
-	var msg model.PlayerMessage
+	var msg model.PlayersCommand
 	msg, _ = rcon.GetPlayers()
 	return c.JSON(msg)
 }
@@ -40,14 +40,14 @@ func KickHandler(c *fiber.Ctx) error {
 }
 
 func MsgHandler(c *fiber.Ctx) error {
-	var msg model.ApiMessage
+	var msg model.NoReplyCommand
 	cmd := c.Params("msg")
 	msg, _ = rcon.SendMessage(cmd)
 	return c.JSON(msg)
 }
 
 func StopHandler(c *fiber.Ctx) error {
-	var msg model.ApiMessage
+	var msg model.NoReplyCommand
 	confirm := c.Params("confirm")
 	if confirm == "true" {
 		msg, _ = rcon.StopServer(true)
