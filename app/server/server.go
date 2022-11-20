@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/Random7-JF/go-rcon-svelte/app/config"
+	"github.com/Random7-JF/go-rcon/app/config"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/Random7-JF/go-rcon-svelte/app/config"
-	"github.com/Random7-JF/go-rcon-svelte/app/model"
-	"github.com/Random7-JF/go-rcon-svelte/app/rcon"
-	"github.com/Random7-JF/go-rcon-svelte/app/server"
+	"github.com/Random7-JF/go-rcon/app/config"
+	"github.com/Random7-JF/go-rcon/app/model"
+	"github.com/Random7-JF/go-rcon/app/rcon"
+	"github.com/Random7-JF/go-rcon/app/server"
 )
 
 var App config.App

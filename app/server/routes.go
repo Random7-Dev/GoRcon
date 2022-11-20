@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/Random7-JF/go-rcon-svelte/app/config"
-	"github.com/Random7-JF/go-rcon-svelte/app/model"
-	"github.com/Random7-JF/go-rcon-svelte/app/rcon"
+	"github.com/Random7-JF/go-rcon/app/config"
+	"github.com/Random7-JF/go-rcon/app/model"
+	"github.com/Random7-JF/go-rcon/app/rcon"
 	"github.com/gofiber/fiber/v2"
 )
 

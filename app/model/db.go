@@ -3,7 +3,7 @@ package model
 import (
 	"fmt"
 
-	"github.com/Random7-JF/go-rcon-svelte/app/config"
+	"github.com/Random7-JF/go-rcon/app/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

@@ -1,4 +1,4 @@
-module github.com/Random7-JF/go-rcon-svelte
+module github.com/Random7-JF/go-rcon
 
 go 1.18
 

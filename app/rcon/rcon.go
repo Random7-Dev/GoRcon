@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Random7-JF/go-rcon-svelte/app/config"
-	"github.com/Random7-JF/go-rcon-svelte/app/model"
+	"github.com/Random7-JF/go-rcon/app/config"
+	"github.com/Random7-JF/go-rcon/app/model"
 
 	mcrcon "github.com/Kelwing/mc-rcon"
 )
