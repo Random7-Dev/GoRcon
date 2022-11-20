@@ -146,6 +146,8 @@ func SendMessage(message string) (model.ApiMessage, error) {
 	return response, nil
 }
 
+// StopServer send the "stop" command to the sever over the rcon connection
+// this will tell the server to shutdown and it will shutdown. A managed server should start backup after
 func StopServer(confirm bool) (model.ApiMessage, error) {
 	var response model.ApiMessage
 
