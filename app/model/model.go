@@ -14,7 +14,8 @@ type Users struct {
 
 type CommandLog struct {
 	gorm.Model
-	Command  string
-	SentBy   string
-	Response string
+	CommandType string
+	Command     string
+	SentBy      string
+	Response    string
 }

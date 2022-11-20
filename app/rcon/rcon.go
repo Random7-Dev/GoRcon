@@ -56,7 +56,6 @@ func SetupConnection(App *config.App) error {
 // GetPlayers sends a command over the rcon connection and takes the response, parse the string and return
 // the Current player count, Max player count and list of currently connected players in models.Players
 func GetPlayers() (model.PlayerMessage, error) {
-
 	var playersJson model.PlayerMessage
 
 	//cmdresp is the full string we parse
@@ -93,9 +92,10 @@ func GetPlayers() (model.PlayerMessage, error) {
 	}
 
 	model.AddToCommandLog(model.CommandLog{
-		Command:  "list",
-		Response: cmdresp,
-		SentBy:   "Api",
+		CommandType: "list",
+		Command:     "list",
+		Response:    cmdresp,
+		SentBy:      "Api",
 	})
 
 	return playersJson, nil
@@ -114,10 +114,49 @@ func KickPlayer(target string) (model.KickCommand, error) {
 	}
 
 	model.AddToCommandLog(model.CommandLog{
-		Command:  "kick",
-		Response: kickCommand.Response,
-		SentBy:   "Api",
+		CommandType: "kick",
+		Command:     cmd,
+		Response:    kickCommand.Response,
+		SentBy:      "Api",
 	})
 
 	return kickCommand, nil
+}
+
+// SendMessage send a message prefixed with "[Go-Rcon]" to the server for all players to see.
+// Using strings.replace to replace any %20 with a space that come from the Params.
+func SendMessage(message string) (model.ApiMessage, error) {
+	var response model.ApiMessage
+	var err error
+
+	msg := "say [Go-Rcon]: " + message
+	msg = strings.Replace(msg, "%20", " ", -1)
+
+	response.Message, err = RconSession.Rcon.SendCommand(msg)
+	model.AddToCommandLog(model.CommandLog{
+		CommandType: "say",
+		Command:     msg,
+		SentBy:      "api",
+	})
+
+	if err != nil {
+		response.Message = err.Error()
+		return response, err
+	}
+	return response, nil
+}
+
+func StopServer(confirm bool) (model.ApiMessage, error) {
+	var response model.ApiMessage
+
+	if confirm {
+		response.Message, _ = RconSession.Rcon.SendCommand("stop")
+		model.AddToCommandLog(model.CommandLog{
+			CommandType: "stop",
+			Command:     "stop",
+			SentBy:      "api",
+		})
+	}
+
+	return response, nil
 }

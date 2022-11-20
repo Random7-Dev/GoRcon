@@ -14,6 +14,8 @@ func SetupRoutes(App *config.App) {
 
 	//POST routes
 	App.WebServer.Post("/api/v1/kick/:name", KickHandler)
+	App.WebServer.Post("/api/v1/msg/:msg", MsgHandler)
+	App.WebServer.Post("/api/v1/stop/:confirm", StopHandler)
 
 }
 
@@ -34,5 +36,22 @@ func KickHandler(c *fiber.Ctx) error {
 	var msg model.KickCommand
 	target := c.Params("name")
 	msg, _ = rcon.KickPlayer(target)
+	return c.JSON(msg)
+}
+
+func MsgHandler(c *fiber.Ctx) error {
+	var msg model.ApiMessage
+	cmd := c.Params("msg")
+	msg, _ = rcon.SendMessage(cmd)
+	return c.JSON(msg)
+}
+
+func StopHandler(c *fiber.Ctx) error {
+	var msg model.ApiMessage
+	confirm := c.Params("confirm")
+	if confirm == "true" {
+		msg, _ = rcon.StopServer(true)
+	}
+
 	return c.JSON(msg)
 }
