@@ -7,11 +7,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
-type ServerInfo struct {
-	Ip   string
-	Port string
-}
-
 func Serve(App *config.App) {
 
 	App.WebServer = fiber.New()
@@ -23,5 +18,3 @@ func Serve(App *config.App) {
 	url := App.WebSettings.Ip + ":" + App.WebSettings.Port
 	App.WebServer.Listen(url)
 }
-
-//Create routes and handlers
