@@ -10,27 +10,27 @@ type App struct {
 	WebServer    *fiber.App
 	Db           *gorm.DB
 	Rcon         *mcrcon.MCConn
-	WebSettings  WebSettings
-	RconSettings RconSettings
-	DbSettings   DbSettings
+	WebSettings  WebSettings  `json:"web"`
+	RconSettings RconSettings `json:"rcon"`
+	DbSettings   DbSettings   `json:"db"`
 }
 
 type WebSettings struct {
-	Ip   string
-	Port string
+	Ip   string `json:"ip"`
+	Port string `json:"port"`
 }
 
 type RconSettings struct {
-	Ip         string
-	Port       string
-	Password   string
+	Ip         string `json:"ip"`
+	Port       string `json:"port"`
+	Password   string `json:"password"`
 	Connection bool
 }
 
 type DbSettings struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	DbName   string
+	Host     string `json:"host"`
+	Port     string `json:"port"`
+	User     string `json:"user"`
+	Password string `json:"password"`
+	DbName   string `json:"dbname"`
 }
