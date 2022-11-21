@@ -16,7 +16,6 @@ var App config.App
 
 func main() {
 	setupAppSettings()
-
 	go setupDB()
 	go setupRcon()
 

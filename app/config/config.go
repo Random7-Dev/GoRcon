@@ -13,6 +13,7 @@ type App struct {
 	WebSettings  WebSettings  `json:"web"`
 	RconSettings RconSettings `json:"rcon"`
 	DbSettings   DbSettings   `json:"db"`
+	Production   bool         `json:"prod"`
 }
 
 type WebSettings struct {
