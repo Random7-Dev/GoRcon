@@ -30,3 +30,8 @@ type TeleportCommand struct {
 type Players struct {
 	Name string `json:"name"`
 }
+
+type TempalteData struct {
+	Title string
+	Data  map[string]interface{}
+}

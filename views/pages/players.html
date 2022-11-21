@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <h1>{{.Title}}:</h1>
+    <p>{{.Data.Players.CurrentCount}} / {{.Data.Players.MaxCount}}</p>
+  </div>
+  <div class="row">
+    {{if ne .Data.Players.CurrentCount 0}}
+    <ul>
+      {{range .Data.Players.Players}}
+      <li>{{.Name}}</li>
+      {{end}}
+    </ul>
+    {{else}}
+    <p>No Players Online</p>
+    {{end}}
+  </div>
+</div>
