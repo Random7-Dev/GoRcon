@@ -1,6 +1,23 @@
 <div class="container">
-    <div class="row">
-        <h2>{{.Title}}</h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam ea deserunt temporibus earum quibusdam inventore, architecto consequatur accusantium dolorum iure illum quae cumque doloremque placeat explicabo optio excepturi non tempore! Illum quaerat rerum quod hic non, possimus reiciendis sunt impedit sit qui officia in obcaecati iste explicabo accusantium neque ipsa ut pariatur quidem porro quia! Numquam vel facere temporibus esse.</p>
+  <div class="row">
+    <h2>{{.Title}}</h2>
+    <hr />
+  </div>
+  <div class="row">
+    <div class="col">
+      <button onclick=Kick()>Kick</button>
     </div>
+  </div>
 </div>
+
+<script>
+  const Kick = () => {
+    console.log("click")
+    fetch("http://localhost:8080/api/v1/kick/Random777", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+</script>

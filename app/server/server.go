@@ -20,7 +20,7 @@ func Serve(App *config.App) {
 	})
 
 	App.WebServer.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:5173",
+		AllowOrigins: "*",
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
