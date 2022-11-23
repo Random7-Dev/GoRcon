@@ -8,6 +8,7 @@ func SetupRoutes(App *config.App) {
 	//View routes
 	//Get
 	App.WebServer.Get("/", IndexHandler)
+	App.WebServer.Get("/dashboard", DashboardHandler)
 	App.WebServer.Get("/players", PlayersPageHandler)
 	App.WebServer.Get("/commands", CommandsHandler)
 	//Post

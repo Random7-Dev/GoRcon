@@ -20,10 +20,17 @@ func PlayersHandler(c *fiber.Ctx) error {
 }
 
 func IndexHandler(c *fiber.Ctx) error {
-	return c.Render("pages/commands", model.TempalteData{
-		Title: "GoRcon",
+	return c.Render("pages/index", model.TempalteData{
+		Title: "",
 	}, "layouts/main")
 }
+
+func DashboardHandler(c *fiber.Ctx) error {
+	return c.Render("pages/dashboard", model.TempalteData{
+		Title: "Dashboard",
+	}, "layouts/main")
+}
+
 func PlayersPageHandler(c *fiber.Ctx) error {
 	players, err := rcon.GetPlayers()
 	if err != nil {
