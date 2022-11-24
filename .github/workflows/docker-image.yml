@@ -20,7 +20,7 @@ jobs:
       uses: Random7-JF/go-rcon@main
       with:
         ## the name of our image
-        name: random777/GoRcon
+        name: random777/gorcon
         ## Here we pass in our Docker Username
         username: ${{ secrets.DOCKER_USERNAME }}
         ## and our Docker password which 
