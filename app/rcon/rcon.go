@@ -91,7 +91,7 @@ func GetPlayers() (model.PlayersCommand, error) {
 		playersJson.Players = append(playersJson.Players, model.Players{Name: s})
 	}
 
-	model.AddToCommandLog(model.CommandLog{
+	go model.AddToCommandLog(model.CommandLog{
 		CommandType: "list",
 		Command:     "list",
 		Response:    cmdresp,
@@ -113,7 +113,7 @@ func KickPlayer(target string) (model.KickCommand, error) {
 		kickCommand.Error = err.Error()
 	}
 
-	model.AddToCommandLog(model.CommandLog{
+	go model.AddToCommandLog(model.CommandLog{
 		CommandType: "kick",
 		Command:     cmd,
 		Response:    kickCommand.Response,
@@ -133,16 +133,17 @@ func SendMessage(message string) (model.NoReplyCommand, error) {
 	msg = strings.Replace(msg, "%20", " ", -1)
 
 	response.Error, err = RconSession.Rcon.SendCommand(msg)
-	model.AddToCommandLog(model.CommandLog{
+	if err != nil {
+		response.Error = err.Error()
+		return response, err
+	}
+
+	go model.AddToCommandLog(model.CommandLog{
 		CommandType: "say",
 		Command:     msg,
 		SentBy:      "api",
 	})
 
-	if err != nil {
-		response.Error = err.Error()
-		return response, err
-	}
 	return response, nil
 }
 
@@ -153,7 +154,7 @@ func StopServer(confirm bool) (model.NoReplyCommand, error) {
 
 	if confirm {
 		response.Error, _ = RconSession.Rcon.SendCommand("stop")
-		model.AddToCommandLog(model.CommandLog{
+		go model.AddToCommandLog(model.CommandLog{
 			CommandType: "stop",
 			Command:     "stop",
 			SentBy:      "api",

@@ -17,6 +17,7 @@ func KickCmdHandler(c *fiber.Ctx) error {
 
 	return c.JSON(msg)
 }
+
 func KickHandler(c *fiber.Ctx) error {
 	var msg model.KickCommand
 	target := c.Params("name")

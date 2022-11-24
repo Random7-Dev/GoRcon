@@ -21,15 +21,15 @@ type PlayersCommand struct {
 	Players      []Players `json:"players"`
 }
 
+type Players struct {
+	Name string `json:"name"`
+}
+
 type TeleportCommand struct {
 	Xcoord   string `json:"xcoord"`
 	Ycoord   string `json:"ycoord"`
 	Target   string `json:"target"`
 	Response string `json:"response"`
-}
-
-type Players struct {
-	Name string `json:"name"`
 }
 
 type TempalteData struct {

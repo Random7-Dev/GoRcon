@@ -18,6 +18,7 @@ func PlayersHandler(c *fiber.Ctx) error {
 	msg, _ = rcon.GetPlayers()
 	return c.JSON(msg)
 }
+
 func IndexHandler(c *fiber.Ctx) error {
 	return c.Render("pages/commands", model.TempalteData{
 		Title: "GoRcon",
