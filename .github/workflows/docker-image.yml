@@ -13,7 +13,7 @@ jobs:
     
     ## Builds our docker image!
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag GoRcon:$(date +%s)
+      run: docker build . --file Dockerfile --tag gorcon:$(date +%s)
 
     ## Publishes our image to Docker Hub 😎
     - name: Publish to Registry
