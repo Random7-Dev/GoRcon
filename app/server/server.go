@@ -24,6 +24,8 @@ func Serve(App *config.App) {
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
+	App.WebServer.Static("/static", "./views/static")
+
 	SetupRoutes(App)
 
 	url := App.WebSettings.Ip + ":" + App.WebSettings.Port

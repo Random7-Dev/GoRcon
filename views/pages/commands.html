@@ -13,11 +13,12 @@
 <script>
   const Kick = () => {
     console.log("click")
-    fetch("http://localhost:8080/api/v1/kick/Random777", {
+    fetch("http://localhost:8080/cmd/kick", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ target: "Random777" })
     });
   }
 </script>

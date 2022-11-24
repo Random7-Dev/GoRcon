@@ -10,6 +10,8 @@ func SetupRoutes(App *config.App) {
 	App.WebServer.Get("/", IndexHandler)
 	App.WebServer.Get("/players", PlayersPageHandler)
 	App.WebServer.Get("/commands", CommandsHandler)
+	//Post
+	App.WebServer.Post("/cmd/kick", KickCmdHandler)
 	//API routes
 	//GET routes
 	App.WebServer.Get("/api/v1/", HomeHandler)

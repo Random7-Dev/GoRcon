@@ -6,6 +6,17 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+func KickCmdHandler(c *fiber.Ctx) error {
+	var msg, target model.KickCommand
+	err := c.BodyParser(&target)
+	if err != nil {
+		return c.JSON(fiber.Map{"KickCmdHandler error: ": err.Error()})
+	}
+	msg.Target = target.Target
+	msg, _ = rcon.KickPlayer(msg.Target)
+
+	return c.JSON(msg)
+}
 func KickHandler(c *fiber.Ctx) error {
 	var msg model.KickCommand
 	target := c.Params("name")

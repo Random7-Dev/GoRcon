@@ -10,6 +10,7 @@ type NoReplyCommand struct {
 }
 
 type KickCommand struct {
+	Target   string `json:"target"`
 	Response string `json:"message"`
 	Error    string `json:"error"`
 }
