@@ -2,7 +2,7 @@ name: Build and Publish Docker Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build-and-publish:
@@ -17,7 +17,7 @@ jobs:
 
     ## Publishes our image to Docker Hub 😎
     - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: Random7-JF/go-rcon@main
       with:
         ## the name of our image
         name: random777/GoRcon
