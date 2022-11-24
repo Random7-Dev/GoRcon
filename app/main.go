@@ -18,7 +18,6 @@ func main() {
 	setupAppSettings()
 	go setupDB()
 	go setupRcon()
-
 	server.Serve(&App)
 }
 
