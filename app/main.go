@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -15,7 +16,7 @@ import (
 var App config.App
 
 func main() {
-	setupAppSettings()
+	setupAppConfig()
 	go setupDB()
 	go setupRcon()
 	server.Serve(&App)
@@ -33,7 +34,33 @@ func setupRcon() {
 	rcon.NewRconSession(rconsession)
 }
 
-func setupAppSettings() {
+func setupAppConfig() {
+	flag.BoolVar(&App.Config, "config", true, "Set true to use a config.json, false to use only cmd ling args")
+
+	flag.StringVar(&App.WebSettings.Ip, "webip", "0.0.0.0", "Set the listening IP of the web server.")
+	flag.StringVar(&App.WebSettings.Port, "webport", "8080", "Set the listening Port of the web server.")
+
+	flag.StringVar(&App.RconSettings.Ip, "rconip", "127.0.0.1", "Set the IP of the RCON server to connect to.")
+	flag.StringVar(&App.RconSettings.Port, "rconport", "25575", "Set the port of the RCON server to connect to.")
+	flag.StringVar(&App.RconSettings.Password, "rconpass", "super_secret", "Set the Password of the RCON server.")
+
+	flag.StringVar(&App.DbSettings.Host, "dbhost", "127.0.0.1", "Set the hostname of the DB server to connect to.")
+	flag.StringVar(&App.DbSettings.Port, "dbport", "5432", "Set the Port of the DB server to connect to.")
+	flag.StringVar(&App.DbSettings.User, "dbuser", "postgres", "Set the username of the DB server to connect to.")
+	flag.StringVar(&App.DbSettings.Password, "dbpass", "postgres", "Set the password of the DB server to connect to.")
+	flag.StringVar(&App.DbSettings.DbName, "dbname", "gorcon", "Set the name of the database on the DB server to connect to.")
+
+	flag.Parse()
+
+	if !App.Config {
+		fmt.Println("Using Command Line args to configure app.")
+	} else {
+		fmt.Println("Using Config.json to configure app.")
+		setupJsonAppSettings()
+	}
+}
+
+func setupJsonAppSettings() {
 	configFile, err := os.Open("config.json")
 	if err != nil {
 		fmt.Println(err.Error())

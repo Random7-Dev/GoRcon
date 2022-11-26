@@ -14,6 +14,7 @@ type App struct {
 	RconSettings RconSettings `json:"rcon"`
 	DbSettings   DbSettings   `json:"db"`
 	Production   bool         `json:"prod"`
+	Config       bool
 }
 
 type WebSettings struct {
