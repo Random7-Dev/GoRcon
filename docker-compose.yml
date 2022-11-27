@@ -12,6 +12,7 @@ services:
       - db:/var/lib/postgresql/data
   gorcon:
     image: gorcon
+    restart: always
     depends_on:
       - db
     ports:
