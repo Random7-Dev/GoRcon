@@ -21,7 +21,6 @@ type App struct {
 	DbSettings   DbSettings   `json:"db"`
 	Production   bool         `json:"prod"`
 	Config       bool
-	Build        bool
 }
 
 type WebSettings struct {
@@ -47,6 +46,7 @@ type DbSettings struct {
 func (App *App) SetupAppConfig() {
 
 	flag.BoolVar(&App.Config, "config", false, "Set true to use a config.json, false to use only cmd ling args")
+	flag.BoolVar(&App.Production, "prod", false, "Set true for production mode, no live template updates.")
 
 	flag.StringVar(&App.WebSettings.Ip, "webip", "0.0.0.0", "Set the listening IP of the web server.")
 	flag.StringVar(&App.WebSettings.Port, "webport", "8080", "Set the listening Port of the web server.")
