@@ -1,0 +1,5 @@
+.github/*
+config.json
+config.example.json
+.gitignore
+docker-compose.yml

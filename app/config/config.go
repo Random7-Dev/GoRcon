@@ -15,6 +15,7 @@ type App struct {
 	DbSettings   DbSettings   `json:"db"`
 	Production   bool         `json:"prod"`
 	Config       bool
+	Build        bool
 }
 
 type WebSettings struct {

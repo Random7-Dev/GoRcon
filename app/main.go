@@ -17,6 +17,11 @@ var App config.App
 
 func main() {
 	setupAppConfig()
+
+	fmt.Println(App.WebSettings)
+	fmt.Println(App.RconSettings)
+	fmt.Println(App.DbSettings)
+
 	go setupDB()
 	go setupRcon()
 	server.Serve(&App)
@@ -35,7 +40,7 @@ func setupRcon() {
 }
 
 func setupAppConfig() {
-	flag.BoolVar(&App.Config, "config", true, "Set true to use a config.json, false to use only cmd ling args")
+	flag.BoolVar(&App.Config, "config", false, "Set true to use a config.json, false to use only cmd ling args")
 
 	flag.StringVar(&App.WebSettings.Ip, "webip", "0.0.0.0", "Set the listening IP of the web server.")
 	flag.StringVar(&App.WebSettings.Port, "webport", "8080", "Set the listening Port of the web server.")
@@ -50,7 +55,9 @@ func setupAppConfig() {
 	flag.StringVar(&App.DbSettings.Password, "dbpass", "postgres", "Set the password of the DB server to connect to.")
 	flag.StringVar(&App.DbSettings.DbName, "dbname", "gorcon", "Set the name of the database on the DB server to connect to.")
 
+	fmt.Println(flag.Args())
 	flag.Parse()
+	fmt.Println(flag.Args())
 
 	if !App.Config {
 		fmt.Println("Using Command Line args to configure app.")

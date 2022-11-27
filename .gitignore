@@ -21,3 +21,5 @@ lerna-debug.log*
 *.sw?
 config.json
 bin/*
+.env
+app.env
