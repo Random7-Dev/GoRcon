@@ -20,7 +20,7 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-//PostSendCommand retrieves the command and effected player and send the proper request to the Rcon based on the values
+// PostSendCommand retrieves the command and effected player and send the proper request to the Rcon based on the values
 func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
 
 	data := new(PlayerCommands)
@@ -62,7 +62,7 @@ func (m *Repository) PostSendCommand(w http.ResponseWriter, r *http.Request) {
 // Redirect back to the commands page
 // display the message.
 
-//PostSendCustomCommand retreives the custom command from the form.
+// PostSendCustomCommand retreives the custom command from the form.
 func (m *Repository) PostCustom(w http.ResponseWriter, r *http.Request) {
 	command := r.FormValue("customCommand")
 
@@ -74,10 +74,10 @@ func (m *Repository) PostCustom(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(resp)
 	m.App.Session.Put(r.Context(), "flash", resp)
-	http.Redirect(w, r, "/commands", http.StatusSeeOther)
+	http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 }
 
-//PostSendCustomCommand retreives the custom command from the form.
+// PostSendCustomCommand retreives the custom command from the form.
 func (m *Repository) PostWhitelist(w http.ResponseWriter, r *http.Request) {
 	target := r.FormValue("whitelist")
 	fmt.Println(target)
@@ -88,10 +88,10 @@ func (m *Repository) PostWhitelist(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(resp)
 	m.App.Session.Put(r.Context(), "flash", resp)
-	http.Redirect(w, r, "/commands", http.StatusSeeOther)
+	http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 }
 
-//PostSendCustomCommand retreives the custom command from the form.
+// PostSendCustomCommand retreives the custom command from the form.
 func (m *Repository) PostRestart(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	confirmation := r.Form["restartServer"]
@@ -104,5 +104,5 @@ func (m *Repository) PostRestart(w http.ResponseWriter, r *http.Request) {
 
 	m.App.Rcon.DisconnectRcon()
 	m.App.Session.Put(r.Context(), "error", resp)
-	http.Redirect(w, r, "/commands", http.StatusSeeOther)
+	http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 }
