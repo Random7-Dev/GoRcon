@@ -6,7 +6,11 @@ type Api struct {
 }
 
 type NoReplyCommand struct {
-	Error string `json:"Error"`
+	Error string `json:"error"`
+}
+type CommandResponse struct {
+	Response string `json:"response"`
+	Error    string `json:"error"`
 }
 
 type KickCommand struct {

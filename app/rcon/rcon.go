@@ -147,6 +147,29 @@ func SendMessage(message string) (model.NoReplyCommand, error) {
 	return response, nil
 }
 
+// SendMessage send a message prefixed with "[Go-Rcon]" to the server for all players to see.
+// Using strings.replace to replace any %20 with a space that come from the Params.
+func SetTime(time string) (model.CommandResponse, error) {
+	var response model.CommandResponse
+	var err error
+
+	cmd := "time set " + time
+	response.Response, err = RconSession.Rcon.SendCommand(cmd)
+	if err != nil {
+		response.Error = err.Error()
+		return response, err
+	}
+
+	go model.AddToCommandLog(model.CommandLog{
+		CommandType: "time",
+		Command:     cmd,
+		SentBy:      "api",
+		Response:    response.Response,
+	})
+
+	return response, nil
+}
+
 // StopServer send the "stop" command to the sever over the rcon connection
 // this will tell the server to shutdown and it will shutdown. A managed server should start backup after
 func StopServer(confirm bool) (model.NoReplyCommand, error) {

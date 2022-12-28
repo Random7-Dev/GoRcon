@@ -5,20 +5,31 @@
   </div>
   <div class="row">
     <div class="col">
-      <button onclick=Kick()>Kick</button>
+      <form action="/commands" method="post">
+        <label for="cmd">Command to send</label><br>
+        <input type="text" id="cmd" name="cmd" value="say"><br>
+        <label for="value">Params:</label><br>
+        <input type="text" id="value" name="value" value=""><br><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="col">
+      <form action="/commands" method="post">
+        <label for="cmd">Command to send</label><br>
+        <input type="text" id="cmd" name="cmd" value="time"><br>
+        <label for="value">Params:</label><br>
+        <input type="text" id="value" name="value" value=""><br><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="col">
+      <form action="/commands" method="post">
+        <label for="cmd">Command to send</label><br>
+        <input type="text" id="cmd" name="cmd" value="kick"><br>
+        <label for="value">Params:</label><br>
+        <input type="text" id="value" name="value" value=""><br><br>
+        <input type="submit" value="Submit">
+      </form>
     </div>
   </div>
 </div>
-
-<script>
-  const Kick = () => {
-    console.log("click")
-    fetch("http://localhost:8080/cmd/kick", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ target: "Random777" })
-    });
-  }
-</script>
